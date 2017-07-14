@@ -13,9 +13,6 @@
  
  ![image](https://github.com/itsonglin/wechat_desktop/raw/master/descPics/collections.png)
  
-## 收藏
-  
-  ![image](https://github.com/itsonglin/wechat_desktop/raw/master/descPics/collections.png)
 
 ## 主菜单
 
@@ -43,7 +40,7 @@
   
 ### 清除缓存
 
-  ![image](https://github.com/itsonglin/wechat_desktop/raw/master/descPics/cahce.png)
+  ![image](https://github.com/itsonglin/wechat_desktop/raw/master/descPics/cache.png)
 
 
 ### 关于
