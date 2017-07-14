@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="gbk" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rc.db.dao.ImageAttachmentDao">
+
+    <cache/>
+
+    <insert id="insert">
+		INSERT INTO image_attachment(id, title, imageUrl, description, width, height, imagesize)
+		VALUES (#{id}, #{title}, #{imageUrl}, #{description}, #{width}, #{height}, #{imagesize})
+	</insert>
+
+
+    <select id="findById" resultType="ImageAttachment">
+		SELECT * FROM image_attachment where id = #{id}
+	</select>
+
+    <select id="findAll" resultType="ImageAttachment">
+		SELECT * FROM image_attachment
+	</select>
+
+    <select id="find" resultType="ImageAttachment" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM image_attachment where ${field} = ${val}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+		SELECT count(1) FROM image_attachment
+	</select>
+
+    <select id="exist" resultType="java.lang.Integer">
+		SELECT count(1) FROM image_attachment where id = #{id}
+	</select>
+
+    <delete id="deleteAll">
+		delete from image_attachment
+	</delete>
+
+    <update id="update">
+        UPDATE image_attachment
+        <set>
+            id=#{id},
+            title=#{title},
+            imageUrl=#{imageUrl},
+            description=#{description},
+            width=#{width},
+            height=#{height},
+            imagesize=#{imagesize}
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <update id="updateIgnoreNull">
+        UPDATE image_attachment
+        <set>
+            <if test="id != null">id=#{id},</if>
+            <if test="title != null">title=#{title},</if>
+            <if test="imageUrl != null">imageUrl=#{imageUrl},</if>
+            <if test="description != null">description=#{description},</if>
+            <if test="width != null">width=#{width},</if>
+            <if test="height != null">height=#{height},</if>
+            <if test="imagesize != null">imagesize=#{imagesize},</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+

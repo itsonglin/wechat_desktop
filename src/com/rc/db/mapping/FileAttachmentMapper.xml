@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="gbk" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rc.db.dao.FileAttachmentDao">
+
+    <cache/>
+
+    <insert id="insert">
+		INSERT INTO file_attachment(id, title, link, description)
+		VALUES (#{id}, #{title}, #{link}, #{description})
+	</insert>
+
+
+    <select id="findById" resultType="FileAttachment">
+		SELECT * FROM file_attachment where id = #{id}
+	</select>
+
+    <select id="findAll" resultType="FileAttachment">
+		SELECT * FROM file_attachment
+	</select>
+
+    <select id="find" resultType="FileAttachment" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM file_attachment where ${field} = ${val}
+    </select>
+
+    <select id="search" resultType="FileAttachment" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM file_attachment where title like ${condition}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+		SELECT count(1) FROM file_attachment
+	</select>
+
+    <select id="exist" resultType="java.lang.Integer">
+		SELECT count(1) FROM file_attachment where id = #{id}
+	</select>
+
+    <delete id="deleteAll">
+		delete from file_attachment
+	</delete>
+
+    <update id="update">
+        UPDATE file_attachment
+        <set>
+            id=#{id},
+            title=#{title},
+            link=#{link},
+            description=#{description}
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <update id="updateIgnoreNull">
+        UPDATE file_attachment
+        <set>
+            <if test="id != null">id=#{id},</if>
+            <if test="title != null">title=#{title},</if>
+            <if test="link != null">link=#{link},</if>
+            <if test="description != null">description=#{description},</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+

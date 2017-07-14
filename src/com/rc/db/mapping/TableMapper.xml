@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="gbk" ?>     
+	<!DOCTYPE mapper     
+	PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"     
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rc.db.dao.TableDao">
+	<update id="createCurrentUserTable">
+		create table current_user(userId VARCHAR(20) PRIMARY KEY, username VARCHAR(20),
+		authToken VARCHAR(64),password VARCHAR(20),rawPassword VARCHAR(64),
+		expireDate VARCHAR(20),realName VARCHAR(20),bcrypt VARCHAR(64),
+		avatarOrigin VARCHAR(1024));
+	</update>
+
+	<update id="createRoomTable">
+		create table room(roomId VARCHAR(20) PRIMARY KEY, type VARCHAR(10),
+		name VARCHAR(64),topic VARCHAR(64),muted VARCHAR(20),
+		member VARCHAR(10240),sysMes BOOLEAN ,msgSum INTEGER,
+		lastChatAt INTEGER, creatorName VARCHAR(64), creatorId VARCHAR(20), jitsiTimeout VARCHAR(20), readOnly BOOLEAN,
+		archived BOOLEAN, defaultRoom BOOLEAN, createdAt VARCHAR(20), updatedAt VARCHAR(20), unreadCount INTEGER, totalReadCount INTEGER, lastMessage VARCHAR(1024));
+	</update>
+
+	<update id="createMessageTable">
+		create table message(
+		id VARCHAR(20) PRIMARY KEY,
+		roomId VARCHAR(20),
+		messageContent TEXT,
+		groupable BOOLEAN,
+		timestamp INTEGER,
+		senderUsername VARCHAR(64),
+		senderId VARCHAR(20),
+		updatedAt INTEGER,
+		needToResend BOOLEAN,
+		progress INTEGER,
+		deleted BOOLEAN,
+		systemMessage BOOLEAN,
+		fileAttachmentId VARCHAR(20),
+		imageAttachmentId VARCHAR(20));
+	</update>
+
+	<update id="createFileAttachmentTable">
+		create table file_attachment(
+		id VARCHAR(20) PRIMARY KEY,
+		title VARCHAR(1024),
+		link VARCHAR(10240),
+		description VARCHAR(10240))
+	</update>
+
+	<update id="createImageAttachmentTable">
+		create table image_attachment(
+		id VARCHAR(20) PRIMARY KEY,
+		title VARCHAR(1024),
+		imageUrl VARCHAR(10240),
+		description VARCHAR(10240),
+		width INTEGER,
+		height INTEGER,
+		imagesize INTEGER)
+	</update>
+
+
+	<update id="createContactsUserTable">
+		create table contacts_user(
+		userId VARCHAR(20) PRIMARY KEY,
+		username VARCHAR(64),
+		name VARCHAR(64))
+	</update>
+
+	<select id="tableExist" resultType="java.lang.Integer">
+		select count(1) from sqlite_master where type = 'table' and name = #{name}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

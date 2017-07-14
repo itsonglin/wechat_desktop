@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 引用db.properties配置文件 -->
+    <properties resource="db.properties"/>
+
+    <typeAliases>
+        <typeAlias type="com.rc.db.model.CurrentUser" alias="CurrentUser"/>
+        <typeAlias type="com.rc.db.model.Room" alias="Room"/>
+        <typeAlias type="com.rc.db.model.Message" alias="Message"/>
+        <typeAlias type="com.rc.db.model.FileAttachment" alias="FileAttachment"/>
+        <typeAlias type="com.rc.db.model.ImageAttachment" alias="ImageAttachment"/>
+        <typeAlias type="com.rc.db.model.ContactsUser" alias="ContactsUser"/>
+    </typeAliases>
+
+    <!-- development : 开发模式 work : 工作模式 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!-- 配置数据库连接信息 -->
+            <dataSource type="POOLED">
+                <!-- value属性值引用db.properties配置文件中配置的值 -->
+                <property name="driver" value="${jdbc.driverClassName}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <!--<property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>-->
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <mappers>
+        <mapper resource="com/rc/db/mapping/TableMapper.xml"/>
+
+        <mapper resource="com/rc/db/mapping/CurrentUserMapper.xml"/>
+        <mapper resource="com/rc/db/mapping/RoomMapper.xml"/>
+        <mapper resource="com/rc/db/mapping/MessageMapper.xml"/>
+        <mapper resource="com/rc/db/mapping/FileAttachmentMapper.xml"/>
+        <mapper resource="com/rc/db/mapping/ImageAttachmentMapper.xml"/>
+        <mapper resource="com/rc/db/mapping/ContactsUserMapper.xml"/>
+    </mappers>
+
+
+</configuration>

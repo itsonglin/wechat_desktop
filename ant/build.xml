@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="wechat" default="bundle-wechat" basedir=".">
+
+    <taskdef name="bundleapp"
+             classname="com.oracle.appbundler.AppBundlerTask"
+             classpath="lib/appbundler-1.0.jar"/>
+    <target name="bundle-wechat">
+        <bundleapp outputdirectory="../out"
+                   name="微信"
+                   displayname="微信"
+                   identifier="com.rc.app.App"
+                   icon="src/ic_launcher.icns"
+                   hidedockicon="src/ic_launcher.icns"
+                   mainclassname="com.rc.app.App">
+            <classpath dir="../out/artifacts/rocketchat_desktop_jar"/>
+        </bundleapp>
+    </target>
+
+</project>

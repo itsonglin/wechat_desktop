@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="gbk" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rc.db.dao.RoomDao">
+
+    <cache/>
+
+    <insert id="insert">
+		INSERT INTO room(roomId, type, name, topic, muted, member, sysMes, msgSum, lastChatAt, creatorName, creatorId,
+		jitsiTimeout, readOnly, archived, defaultRoom, createdAt, updatedAt, unreadCount, totalReadCount, lastMessage)
+		VALUES (#{roomId},#{type},#{name},#{topic},#{muted},#{member},#{sysMes},#{msgSum},#{lastChatAt},#{creatorName},#{creatorId},
+		#{jitsiTimeout},#{readOnly},#{archived},#{defaultRoom},#{createdAt},#{updatedAt},#{unreadCount},#{totalReadCount},#{lastMessage})
+	</insert>
+
+
+    <select id="findById" resultType="Room">
+		SELECT * FROM room where roomId = #{id} limit 1
+	</select>
+
+    <select id="findRelativeRoomIdByUserId" resultType="Room" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM room where roomId like ${condition}
+    </select>
+
+    <select id="searchByName" resultType="Room" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM room where name like ${condition} and type != 'd'
+    </select>
+
+    <select id="findAll" resultType="Room">
+		SELECT * FROM room ORDER BY lastChatAt DESC
+	</select>
+
+    <select id="find" resultType="Room" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM room where ${field} = ${val}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+		SELECT count(1) FROM room
+	</select>
+
+    <select id="exist" resultType="java.lang.Integer">
+		SELECT count(1) FROM room where roomId = #{id}
+	</select>
+
+    <delete id="delete">
+        delete from room where roomId = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+		delete from room
+	</delete>
+
+    <update id="update">
+        UPDATE room
+        <set>
+            roomId=#{roomId},
+            type=#{type},
+            name=#{name},
+            topic=#{topic},
+            muted=#{muted},
+            member=#{member},
+            sysMes=#{sysMes},
+            msgSum=#{msgSum},
+            lastChatAt=#{lastChatAt},
+            creatorName=#{creatorName},
+            creatorId=#{creatorId},
+            jitsiTimeout=#{jitsiTimeout},
+            readOnly=#{readOnly},
+            archived=#{archived},
+            defaultRoom=#{defaultRoom},
+            createdAt=#{createdAt},
+            updatedAt=#{updatedAt},
+            unreadCount=#{unreadCount},
+            totalReadCount=#{totalReadCount},
+            lastMessage=#{lastMessage},
+        </set>
+        WHERE roomId=#{roomId}
+    </update>
+
+    <update id="updateIgnoreNull">
+        UPDATE room
+        <set>
+            <if test="roomId!= null">roomId=#{roomId},</if>
+            <if test="type!= null">type=#{type},</if>
+            <if test="name!= null">name=#{name},</if>
+            <if test="topic!= null">topic=#{topic},</if>
+            <if test="muted!= null">muted=#{muted},</if>
+            <if test="member!= null">member=#{member},</if>
+            <if test="sysMes!= null">sysMes=#{sysMes},</if>
+            <if test="msgSum!= null">msgSum=#{msgSum},</if>
+            <if test="lastChatAt!= null">lastChatAt=#{lastChatAt},</if>
+            <if test="creatorName!= null">creatorName=#{creatorName},</if>
+            <if test="creatorId!= null">creatorId=#{creatorId},</if>
+            <if test="jitsiTimeout!= null">jitsiTimeout=#{jitsiTimeout},</if>
+            <if test="readOnly!= null">readOnly=#{readOnly},</if>
+            <if test="archived!= null">archived=#{archived},</if>
+            <if test="defaultRoom!= null">defaultRoom=#{defaultRoom},</if>
+            <if test="createdAt!= null">createdAt=#{createdAt},</if>
+            <if test="updatedAt!= null">updatedAt=#{updatedAt},</if>
+            <if test="unreadCount!= null">unreadCount=#{unreadCount},</if>
+            <if test="totalReadCount!= null">totalReadCount=#{totalReadCount},</if>
+            <if test="lastMessage!= null">lastMessage=#{lastMessage},</if>
+        </set>
+        WHERE roomId=#{roomId}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+
