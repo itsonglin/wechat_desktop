@@ -106,7 +106,7 @@ public class Launcher
     private boolean checkLoginInfo()
     {
         // TODO 判断是否已登录的逻辑
-        return true;
+        return false;
     }
 
     /**

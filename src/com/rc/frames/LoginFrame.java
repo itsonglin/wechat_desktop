@@ -255,7 +255,16 @@ public class LoginFrame extends JFrame
 
     private void doLogin()
     {
-        String name = usernameField.getText();
+
+        this.dispose();
+
+        MainFrame frame = new MainFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+
+        // TODO: 登录逻辑
+        /*String name = usernameField.getText();
         String pwd = new String(passwordField.getPassword());
 
         if (name == null || name.isEmpty())
@@ -295,7 +304,7 @@ public class LoginFrame extends JFrame
             task.addRequestParam("username", usernameField.getText());
             task.addRequestParam("password", new String(passwordField.getPassword()));
             task.execute(Launcher.HOSTNAME + "/api/v1/login");
-        }
+        }*/
     }
 
     private void processLoginResult(JSONObject ret)
