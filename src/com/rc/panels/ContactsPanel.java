@@ -142,7 +142,6 @@ public class ContactsPanel extends ParentAvailablePanel
             BufferedImage image = ImageIO.read(url);
 
             processAvatarData(image, username);
-            System.out.println("获取头像：" + username);
         }
         catch (IOException e)
         {

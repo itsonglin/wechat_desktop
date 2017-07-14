@@ -1,0 +1,1 @@
+ ![image](https://github.com/itsonglin/wechat_desktop/raw/master/descPics/main.png)

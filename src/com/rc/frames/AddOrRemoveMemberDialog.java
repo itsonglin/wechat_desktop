@@ -1,6 +1,5 @@
 package com.rc.frames;
 
-import com.rc.app.ShadowBorder;
 import com.rc.components.*;
 import com.rc.entity.SelectUserData;
 import com.rc.panels.SelectUserPanel;
@@ -61,14 +60,6 @@ public class AddOrRemoveMemberDialog extends JDialog
         setUndecorated(true);
 
         getRootPane().setBorder(new LineBorder(Colors.LIGHT_GRAY));
-
-        if (OSUtil.getOsType() != OSUtil.Mac_OS)
-        {
-            // 边框阴影，但是会导致字体失真
-            AWTUtilities.setWindowOpaque(this, false);
-            //getRootPane().setOpaque(false);
-            getRootPane().setBorder(ShadowBorder.newInstance());
-        }
 
         selectUserPanel = new SelectUserPanel(DIALOG_WIDTH, DIALOG_HEIGHT - 100, userList);
 
