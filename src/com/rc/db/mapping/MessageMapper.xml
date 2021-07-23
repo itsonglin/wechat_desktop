@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="gbk" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rc.db.dao.MessageDao">
+
+    <cache/>
+
+    <insert id="insert">
+		INSERT INTO message(id, roomId, messageContent, groupable, timestamp,
+		senderUsername, senderId, updatedAt, needToResend, progress, deleted, systemMessage,
+		fileAttachmentId, imageAttachmentId)
+		VALUES (#{id}, #{roomId}, #{messageContent}, #{groupable}, #{timestamp},
+		#{senderUsername}, #{senderId}, #{updatedAt}, #{needToResend}, #{progress},
+		#{deleted}, #{systemMessage}, #{fileAttachmentId}, #{imageAttachmentId})
+	</insert>
+
+    <insert id="insertAll">
+        INSERT INTO message(id, roomId, messageContent, groupable, timestamp,
+        senderUsername, senderId, updatedAt, needToResend, progress, deleted, systemMessage,
+        fileAttachmentId, imageAttachmentId)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            ( #{item.id}, #{item.roomId}, #{item.messageContent}, #{item.groupable}, #{item.timestamp},
+            #{item.senderUsername}, #{item.senderId}, #{item.updatedAt}, #{item.needToResend},
+            #{item.progress}, #{item.deleted}, #{item.systemMessage}, #{item.fileAttachmentId}, #{item.imageAttachmentId})
+        </foreach>
+    </insert>
+
+
+    <select id="findById" resultType="Message">
+		SELECT * FROM message WHERE id = #{id} AND deleted = 0
+	</select>
+
+    <select id="findAll" resultType="Message">
+		SELECT * FROM message  WHERE deleted = 0
+	</select>
+
+    <select id="find" resultType="Message" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM message WHERE ${field} = ${val} AND deleted = 0
+    </select>
+
+    <select id="findByPage" resultType="Message" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM (SELECT * FROM message WHERE roomId = ${roomId} AND deleted = 0 ORDER BY timestamp DESC limit ${offset}, ${pageLength}) order by timestamp asc
+    </select>
+
+    <select id="findBetween" resultType="Message" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM message WHERE roomId = ${roomId} AND timestamp BETWEEN ${start} and ${end} AND deleted = 0 order by timestamp asc
+    </select>
+
+    <select id="search" resultType="Message" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM message WHERE messageContent LIKE ${condition} AND deleted = 0
+    </select>
+
+
+    <select id="count" resultType="java.lang.Integer">
+		SELECT count(1) FROM message  WHERE deleted = 0
+	</select>
+
+    <select id="countByRoom" resultType="java.lang.Integer">
+        SELECT count(1) FROM message WHERE roomId = #{roomId} AND deleted = 0
+    </select>
+
+
+    <select id="exist" resultType="java.lang.Integer">
+		SELECT count(1) FROM message WHERE id = #{id}
+	</select>
+
+    <select id="findLastMessage" resultType="Message">
+        SELECT * FROM message where roomId = #{roomId} ORDER BY timestamp DESC limit 1
+    </select>
+
+    <select id="findLastMessageTime" resultType="java.lang.Long">
+       SELECT MAX(timestamp)  FROM  message WHERE roomId = #{roomId} AND updatedAt > 0
+    </select>
+
+    <select id="findFirstMessageTime" resultType="java.lang.Long">
+        SELECT MIN(timestamp)  FROM  message WHERE roomId = #{roomId}
+    </select>
+
+
+    <delete id="deleteAll">
+		DELETE FROM message
+	</delete>
+
+    <delete id="deleteByRoomId">
+        DELETE FROM message WHERE roomId = #{roomId}
+    </delete>
+
+    <delete id="delete">
+        DELETE FROM MESSAGE WHERE id = #{id}
+    </delete>
+
+
+    <update id="update">
+        UPDATE message
+        <set>
+            id=#{id},
+            roomId=#{roomId},
+            messageContent=#{messageContent},
+            groupable=#{groupable},
+            timestamp=#{timestamp},
+            senderUsername=#{senderUsername},
+            senderId=#{senderId},
+            updatedAt=#{updatedAt},
+            needToResend=#{needToResend},
+            progress=#{progress},
+            deleted=#{deleted},
+            systemMessage=#{systemMessage},
+            fileAttachmentId=#{fileAttachmentId},
+            imageAttachmentId=#{imageAttachmentId},
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <update id="updateIgnoreNull">
+        UPDATE message
+        <set>
+            <if test="id != null">id=#{id},</if>
+            <if test="roomId != null">roomId=#{roomId},</if>
+            <if test="messageContent != null">messageContent=#{messageContent},</if>
+            <if test="groupable != null">groupable=#{groupable},</if>
+            <if test="timestamp != null">timestamp=#{timestamp},</if>
+            <if test="senderUsername != null">senderUsername=#{senderUsername},</if>
+            <if test="senderId != null">senderId=#{senderId},</if>
+            <if test="updatedAt != null">updatedAt=#{updatedAt},</if>
+            <if test="needToResend != null">needToResend=#{needToResend},</if>
+            <if test="progress != null">progress=#{progress},</if>
+            <if test="deleted != null">deleted=#{deleted},</if>
+            <if test="systemMessage != null">systemMessage=#{systemMessage},</if>
+            <if test="fileAttachmentId != null">fileAttachmentId=#{fileAttachmentId},</if>
+            <if test="imageAttachmentId != null">imageAttachmentId=#{imageAttachmentId},</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <update id="updateNeedToResend" statementType="STATEMENT" parameterType="map">
+        UPDATE message SET needToResend = ${status} where id= ${id}
+    </update>
+
+    <update id="updateProgress" statementType="STATEMENT" parameterType="map">
+        UPDATE message SET progress = ${progress} where id= ${id}
+    </update>
+
+    <update id="markDeleted">
+        UPDATE message SET deleted = 1 where id = #{id}
+    </update>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+

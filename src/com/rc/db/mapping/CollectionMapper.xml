@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="gbk" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rc.db.dao.CollectionDao">
+
+    <cache/>
+
+    <insert id="insert">
+		INSERT INTO collection(id, name, description, priority, deadline, read, notified)
+		VALUES (#{id}, #{name}, #{description}, #{priority}, #{deadline}, #{read}, #{notified})
+	</insert>
+
+
+    <select id="findById" resultType="Collection">
+		SELECT * FROM collection where id = #{id} limit 1
+	</select>
+
+    <select id="findAll" resultType="collection">
+		SELECT * FROM collection
+	</select>
+
+    <select id="find" resultType="collection" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM collection where ${field} = ${val}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+		SELECT count(1) FROM collection
+	</select>
+
+
+
+    <select id="exist" resultType="java.lang.Integer">
+		SELECT count(1) FROM collection where id = #{id}
+	</select>
+
+    <delete id="delete">
+        delete from collection where id = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+		delete from collection
+	</delete>
+
+    <update id="update">
+        UPDATE collection
+        <set>
+            id=#{id},
+            name=#{name},
+            description=#{description},
+            priority=#{priority},
+            deadline=#{deadline},
+            read=#{read},
+            notified=#{notified}
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <update id="updateIgnoreNull">
+        UPDATE collection
+        <set>
+            <if test="name!= null">name=#{name},</if>
+            <if test="description!= null">description=#{description},</if>
+            <if test="priority!= null">priority=#{priority},</if>
+            <if test="deadline!= null">deadline=#{deadline},</if>
+            <if test="read!= null">read=#{read},</if>
+            <if test="notified!= null">notified=#{notified}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <select id="countUnreadCollection" resultType="java.lang.Integer">
+       select COUNT(1) from collection where read = 0
+    </select>
+
+    <delete id="deleteAllBug">
+        delete from  collection where id like 'B%'
+    </delete>
+
+    <delete id="deleteAllTask">
+        delete from  collection where id like 'T%'
+    </delete>
+
+    <delete id="deleteBugsExcept">
+        delete from collection where id like 'B%' and id not in
+        (
+            <foreach collection="exceptIds" item="id" separator=",">
+                #{id}
+            </foreach>
+        )
+    </delete>
+
+    <delete id="deleteTasksExcept">
+        delete from collection where id like 'T%' and id not in
+        (
+        <foreach collection="exceptIds" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
+</mapper>
+
+
+
+
+
+
+
+
+

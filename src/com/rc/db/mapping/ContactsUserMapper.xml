@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="gbk" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rc.db.dao.ContactsUserDao">
+    <insert id="insert">
+		INSERT INTO contacts_user(userId, username, name)
+		VALUES (#{userId}, #{username}, #{name})
+	</insert>
+
+
+    <select id="findById" resultType="ContactsUser">
+		SELECT * FROM contacts_user where userId = #{id}
+	</select>
+
+    <select id="findAll" resultType="ContactsUser">
+		SELECT * FROM contacts_user
+	</select>
+
+    <select id="find" resultType="ContactsUser" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM contacts_user where ${field} = ${val}
+    </select>
+
+
+    <select id="searchByUsernameOrName" resultType="ContactsUser" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM contacts_user where username like ${usernameCondition} or name like ${nameCondition}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+		SELECT count(1) FROM contacts_user
+	</select>
+
+    <select id="exist" resultType="java.lang.Integer">
+		SELECT count(1) FROM contacts_user where userId = #{id}
+	</select>
+
+    <delete id="deleteAll">
+		delete from contacts_user
+	</delete>
+
+    <delete id="deleteByUsername">
+        delete from contacts_user where username = #{username}
+    </delete>
+
+
+    <update id="update">
+        UPDATE contacts_user
+        <set>
+            userId=#{userId},
+            username=#{username},
+            name=#{name},
+        </set>
+        WHERE userId=#{userId}
+    </update>
+
+    <update id="updateIgnoreNull">
+        UPDATE contacts_user
+        <set>
+            <if test="userId!= null">userId=#{userId},</if>
+            <if test="username!= null">username=#{username},</if>
+            <if test="name!= null">name=#{name},</if>
+        </set>
+        WHERE userId=#{userId}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+

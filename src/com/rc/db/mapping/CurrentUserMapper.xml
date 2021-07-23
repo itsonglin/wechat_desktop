@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="gbk" ?>     
+	<!DOCTYPE mapper     
+	PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"     
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.rc.db.dao.CurrentUserDao">
+
+	<cache/>
+
+	<insert id="insert">
+		INSERT INTO current_user(userId,username,authToken,password,rawPassword,expireDate, realName, bcrypt, avatarOrigin)
+		VALUES (#{userId},#{username},#{authToken},#{password},#{rawPassword},#{expireDate},#{realName},#{bcrypt},#{avatarOrigin})
+	</insert>
+
+
+	<select id="findById" resultType="CurrentUser">
+		SELECT * FROM current_user where userId = #{id}
+	</select>
+
+	<select id="findAll" resultType="CurrentUser">
+		SELECT * FROM current_user
+	</select>
+
+    <select id="find" resultType="CurrentUser" statementType="STATEMENT" parameterType="map">
+        SELECT * FROM current_user where ${field} = ${val}
+    </select>
+
+	<select id="count" resultType="java.lang.Integer">
+		SELECT count(1) FROM current_user
+	</select>
+
+	<select id="exist" resultType="java.lang.Integer">
+		SELECT count(1) FROM current_user where userId = #{id}
+	</select>
+
+	<delete id="deleteAll">
+		delete from current_user
+	</delete>
+
+	<update id="update">
+		UPDATE current_user
+		<set>
+			userId=#{userId},
+			username=#{username},
+			authToken=#{authToken},
+			password=#{password},
+			rawPassword=#{rawPassword},
+			expireDate=#{expireDate},
+			realName=#{realName},
+			bcrypt=#{bcrypt},
+			avatarOrigin=#{avatarOrigin},
+		</set>
+		WHERE userId=#{userId}
+	</update>
+
+	<update id="updateIgnoreNull">
+		UPDATE current_user
+		<set>
+			<if test="userId!= null">userId=#{userId},</if>
+			<if test="username!= null">username=#{username},</if>
+			<if test="authToken!= null">authToken=#{authToken},</if>
+			<if test="password!= null">password=#{password},</if>
+			<if test="rawPassword!= null">rawPassword=#{rawPassword},</if>
+			<if test="expireDate!= null">expireDate=#{expireDate},</if>
+			<if test="realName!= null">realName=#{realName},</if>
+			<if test="bcrypt!= null">bcrypt=#{bcrypt},</if>
+			<if test="avatarOrigin!= null">avatarOrigin=#{avatarOrigin},</if>
+		</set>
+		WHERE userId=#{userId}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
