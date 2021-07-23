@@ -96,6 +96,9 @@
 
   
 
+## 消息提醒
+
+  ![image](https://github.com/itsonglin/wechat_desktop/raw/2.0/descPics/notification.png)
 
 
   
