@@ -19,6 +19,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.InputStream;
 
+import static com.rc.app.Launcher.APP_NAME;
+
 /**
  * Created by song on 17-5-28.
  * <p>
@@ -114,7 +116,7 @@ public class MainFrame extends JFrame
             if (isMacOs)
             {
                 normalTrayIcon = IconUtil.getIcon(this, "/image/ic_launcher_dark.png", 20, 20).getImage();
-                trayIcon = new TrayIcon(normalTrayIcon, "微信");
+                trayIcon = new TrayIcon(normalTrayIcon, APP_NAME);
                 trayIcon.setImageAutoSize(true);
 
                 trayIcon.addMouseListener(new MouseAdapter()
@@ -132,7 +134,7 @@ public class MainFrame extends JFrame
                 normalTrayIcon = IconUtil.getIcon(this, "/image/ic_launcher.png", 20, 20).getImage();
                 emptyTrayIcon = IconUtil.getIcon(this, "/image/ic_launcher_empty.png", 20, 20).getImage();
 
-                trayIcon = new TrayIcon(normalTrayIcon, "微信");
+                trayIcon = new TrayIcon(normalTrayIcon, APP_NAME);
                 trayIcon.setImageAutoSize(true);
                 PopupMenu menu = new PopupMenu();
 
@@ -158,7 +160,7 @@ public class MainFrame extends JFrame
                 MenuItem exitItem = new MenuItem("退出");
                 exitItem.addActionListener(e -> exitApp());
 
-                MenuItem showItem = new MenuItem("打开微信");
+                MenuItem showItem = new MenuItem("打开" + APP_NAME);
                 showItem.addActionListener(e -> setToFront());
                 menu.add(showItem);
                 menu.add(exitItem);

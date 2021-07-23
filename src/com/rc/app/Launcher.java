@@ -23,6 +23,7 @@ import java.util.Map;
  */
 public class Launcher
 {
+    public static String APP_NAME = "微信";
     private static Launcher context;
 
     public static SqlSession sqlSession;

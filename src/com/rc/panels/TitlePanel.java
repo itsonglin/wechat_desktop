@@ -7,9 +7,10 @@ import com.rc.listener.WindowMouseListener;
 import com.rc.utils.*;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
+
+import static com.rc.app.Launcher.APP_NAME;
 
 /**
  * Created by song on 17-5-30.
@@ -203,7 +204,7 @@ public class TitlePanel extends ParentAvailablePanel
 
         titleLabel = new RCLabel();
         titleLabel.setFont(FontUtil.getDefaultFont(18,Font.BOLD));
-        titleLabel.setText("微信");
+        titleLabel.setText(APP_NAME);
         //titleLabel.setCursor(handCursor);
 
 
@@ -293,7 +294,7 @@ public class TitlePanel extends ParentAvailablePanel
 
     public void showAppTitle()
     {
-        this.titleLabel.setText("和理通");
+        this.titleLabel.setText(APP_NAME);
         roomInfoButton.setVisible(false);
     }
 

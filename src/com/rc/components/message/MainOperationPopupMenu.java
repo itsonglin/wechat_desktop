@@ -12,6 +12,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+import static com.rc.app.Launcher.APP_NAME;
+
 /**
  * Created by song on 2017/6/5.
  */
@@ -63,7 +65,7 @@ public class MainOperationPopupMenu extends JPopupMenu
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                int ret = JOptionPane.showConfirmDialog(MainFrame.getContext(), "确认退出微信？", "确认退出", JOptionPane.YES_NO_OPTION);
+                int ret = JOptionPane.showConfirmDialog(MainFrame.getContext(), "确认退出"+APP_NAME+"？", "确认退出", JOptionPane.YES_NO_OPTION);
                 if (ret == JOptionPane.YES_OPTION)
                 {
                     MainFrame.getContext().exitApp();
