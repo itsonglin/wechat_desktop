@@ -1,7 +1,6 @@
 package com.rc.utils;
 
 import com.rc.app.Launcher;
-import com.rc.db.model.CurrentUser;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import org.apache.log4j.Logger;
@@ -11,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.List;
 
 /**
  * Created by song on 2017/6/11.
@@ -21,35 +19,39 @@ public class ImageCache
     public static final int THUMB = 0;
     public static final int ORIGINAL = 1;
 
-    public String IMAGE_CACHE_ROOT_PATH;
-    Logger logger = Logger.getLogger(this.getClass());
-    private CurrentUser currentUser;
+    public static String IMAGE_CACHE_ROOT_PATH;
+    private static Logger logger = Logger.getLogger(ImageCache.class);
 
+    private ImageCache()
+    {
 
-    public ImageCache()
+    }
+
+    static
     {
         try
         {
-            //IMAGE_CACHE_ROOT_PATH = getClass().getResource("/cache").getPath() + "/image";
             IMAGE_CACHE_ROOT_PATH = Launcher.appFilesBasePath + "/cache/image";
-
-            File file = new File(IMAGE_CACHE_ROOT_PATH);
-            if (!file.exists())
-            {
-                file.mkdirs();
-                System.out.println("创建图片缓存目录：" + file.getAbsolutePath());
-            }
+            createCacheDir();
         }
         catch (Exception e)
         {
             IMAGE_CACHE_ROOT_PATH = "./";
+            createCacheDir();
         }
-
-        List<CurrentUser> users = Launcher.currentUserService.findAll();
-        currentUser = users.size() < 1 ? Launcher.currentUser : users.get(0);
     }
 
-    public ImageIcon tryGetThumbCache(String identify)
+    private static void createCacheDir()
+    {
+        File file = new File(IMAGE_CACHE_ROOT_PATH);
+        if (!file.exists())
+        {
+            file.mkdirs();
+            System.out.println("创建图片缓存目录：" + file.getAbsolutePath());
+        }
+    }
+
+    public static ImageIcon tryGetThumbCache(String identify)
     {
         File cacheFile = new File(IMAGE_CACHE_ROOT_PATH + "/" + identify + "_thumb");
         if (cacheFile.exists())
@@ -69,7 +71,7 @@ public class ImageCache
      * @param url
      * @param listener
      */
-    public void requestThumbAsynchronously(String identify, String url, ImageCacheRequestListener listener)
+    public static void requestThumbAsynchronously(String identify, String url, ImageCacheRequestListener listener)
     {
         requestImage(THUMB, identify, url, listener);
 
@@ -82,13 +84,13 @@ public class ImageCache
      * @param url
      * @param listener
      */
-    public void requestOriginalAsynchronously(String identify, String url, ImageCacheRequestListener listener)
+    public static void requestOriginalAsynchronously(String identify, String url, ImageCacheRequestListener listener)
     {
         requestImage(ORIGINAL, identify, url, listener);
     }
 
 
-    private void requestImage(int requestType, String identify, String url, ImageCacheRequestListener listener)
+    private static void requestImage(int requestType, String identify, String url, ImageCacheRequestListener listener)
     {
         String suffix = "";
         int startPos = url.lastIndexOf(".");
@@ -187,7 +189,7 @@ public class ImageCache
         }).start();
     }
 
-    private String buildRemoteImageUrl(String imageUrl)
+    private static String buildRemoteImageUrl(String imageUrl)
     {
         String url;
         // 服务上的图片
@@ -210,7 +212,7 @@ public class ImageCache
      * @param image
      * @param identify
      */
-    public void createThumb(Image image, String identify)
+    public static void createThumb(Image image, String identify)
     {
         try
         {

@@ -42,15 +42,11 @@ import static com.rc.utils.ImageUtil.isGif;
  */
 public class MessageAdapter extends BaseAdapter<BaseMessageViewHolder>
 {
+    private final RCListView listView;
     private List<MessageItem> messageItems;
-    private RCListView listView;
     private AttachmentIconHelper attachmentIconHelper = new AttachmentIconHelper();
-    //private CurrentUserService currentUserService = Launcher.currentUserService;
-    // private CurrentUser currentUser;
-    private ImageCache imageCache;
     private MessageService messageService = Launcher.messageService;
     private Logger logger = Logger.getLogger(this.getClass());
-    private FileCache fileCache;
     private MessagePopupMenu popupMenu = new MessagePopupMenu();
 
 
@@ -62,8 +58,6 @@ public class MessageAdapter extends BaseAdapter<BaseMessageViewHolder>
         this.listView = listView;
 
         //currentUser = currentUserService.findAll().get(0);
-        imageCache = new ImageCache();
-        fileCache = new FileCache();
         this.messageViewHolderCacheHelper = messageViewHolderCacheHelper;
     }
 
@@ -366,7 +360,7 @@ public class MessageAdapter extends BaseAdapter<BaseMessageViewHolder>
         // 远程服务器文件
         if (attachment.getLink().startsWith("/file-upload"))
         {
-            path = fileCache.tryGetFileCache(item.getFileAttachment().getId(), item.getFileAttachment().getTitle());
+            path = FileCache.tryGetFileCache(item.getFileAttachment().getId(), item.getFileAttachment().getTitle());
         }
         // 我自己上传的文件
         else
@@ -377,7 +371,7 @@ public class MessageAdapter extends BaseAdapter<BaseMessageViewHolder>
         if (path != null)
         {
             viewHolder.sizeLabel.setVisible(true);
-            viewHolder.sizeLabel.setText(fileCache.fileSizeString(path));
+            viewHolder.sizeLabel.setText(FileCache.fileSizeString(path));
         }
     }
 
@@ -508,7 +502,7 @@ public class MessageAdapter extends BaseAdapter<BaseMessageViewHolder>
             {
                 if (e.getButton() == MouseEvent.BUTTON1)
                 {
-                    imageCache.requestOriginalAsynchronously(item.getImageAttachment().getId(), item.getImageAttachment().getImageUrl(), new ImageCache.ImageCacheRequestListener()
+                    ImageCache.requestOriginalAsynchronously(item.getImageAttachment().getId(), item.getImageAttachment().getImageUrl(), new ImageCache.ImageCacheRequestListener()
                     {
                         @Override
                         public void onSuccess(ImageIcon icon, String path)
@@ -564,7 +558,7 @@ public class MessageAdapter extends BaseAdapter<BaseMessageViewHolder>
         boolean isGif = isGif(imageUrl);
         if (!isGif)
         {
-            imageIcon = imageCache.tryGetThumbCache(item.getImageAttachment().getId());
+            imageIcon = ImageCache.tryGetThumbCache(item.getImageAttachment().getId());
         }
 
         if (imageIcon == null)
@@ -574,7 +568,7 @@ public class MessageAdapter extends BaseAdapter<BaseMessageViewHolder>
             if (isGif)
             {
                 // 显示GIF图, 不使用缩略图
-                imageCache.requestOriginalAsynchronously(item.getImageAttachment().getId(), imageUrl, new ImageCache.ImageCacheRequestListener()
+                ImageCache.requestOriginalAsynchronously(item.getImageAttachment().getId(), imageUrl, new ImageCache.ImageCacheRequestListener()
                 {
                     @Override
                     public void onSuccess(ImageIcon icon, String path)
@@ -596,7 +590,7 @@ public class MessageAdapter extends BaseAdapter<BaseMessageViewHolder>
             } else
             {
                 // 显示其他图像, 获取缩略图
-                imageCache.requestThumbAsynchronously(item.getImageAttachment().getId(), imageUrl, new ImageCache.ImageCacheRequestListener()
+                ImageCache.requestThumbAsynchronously(item.getImageAttachment().getId(), imageUrl, new ImageCache.ImageCacheRequestListener()
                 {
                     @Override
                     public void onSuccess(ImageIcon icon, String path)

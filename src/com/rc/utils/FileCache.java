@@ -18,31 +18,39 @@ import java.text.DecimalFormat;
 public class FileCache
 {
 
-    public String FILE_CACHE_ROOT_PATH;
-    Logger logger = Logger.getLogger(this.getClass());
-    private DecimalFormat decimalFormat = new DecimalFormat("#.0");
+    public static String FILE_CACHE_ROOT_PATH;
+    private static DecimalFormat decimalFormat = new DecimalFormat("#.0");
 
+    private FileCache()
+    {
 
-    public FileCache()
+    }
+
+    static
     {
         try
         {
-            //FILE_CACHE_ROOT_PATH = getClass().getResource("/cache").getPath() + "/file";
             FILE_CACHE_ROOT_PATH =  Launcher.appFilesBasePath + "/cache/file";
-            File file = new File(FILE_CACHE_ROOT_PATH);
-            if (!file.exists())
-            {
-                file.mkdirs();
-                System.out.println("创建文件缓存目录：" + file.getAbsolutePath());
-            }
+            createCacheDir();
         }
-        catch (Exception e)
+        catch (Throwable e)
         {
             FILE_CACHE_ROOT_PATH = "./";
+            createCacheDir();
         }
     }
 
-    public String tryGetFileCache(String identify, String name)
+    private static void createCacheDir()
+    {
+        File file = new File(FILE_CACHE_ROOT_PATH);
+        if (!file.exists())
+        {
+            file.mkdirs();
+            System.out.println("创建文件缓存目录：" + file.getAbsolutePath());
+        }
+    }
+
+    public static String tryGetFileCache(String identify, String name)
     {
         File cacheFile = new File(FILE_CACHE_ROOT_PATH + "/" + identify + "_" + name);
         if (cacheFile.exists())
@@ -53,7 +61,7 @@ public class FileCache
         return null;
     }
 
-    public String cacheFile(String identify, String name, byte[] data)
+    public static String cacheFile(String identify, String name, byte[] data)
     {
         if (data == null || data.length < 1)
         {
@@ -80,7 +88,7 @@ public class FileCache
         return null;
     }
 
-    public String fileSizeString(String path)
+    public static String fileSizeString(String path)
     {
         File file = new File(path);
         if (file == null)
@@ -89,7 +97,14 @@ public class FileCache
         }
 
         long size = file.length();
-        String retString = "";
+        String retString = prettySizeString(size);
+
+        return retString;
+    }
+
+    public static String prettySizeString(long size)
+    {
+        String retString;
         if (size < 1024)
         {
             retString = size + " 字节";
@@ -105,7 +120,6 @@ public class FileCache
 
         return retString;
     }
-
 
 
 }

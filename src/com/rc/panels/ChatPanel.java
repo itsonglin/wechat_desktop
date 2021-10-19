@@ -109,8 +109,6 @@ public class ChatPanel extends ParentAvailablePanel
     private ImageAttachmentService imageAttachmentService = Launcher.imageAttachmentService;
     private FileAttachmentService fileAttachmentService = Launcher.fileAttachmentService;
     public static List<String> uploadingOrDownloadingFiles = new ArrayList<>();
-    private FileCache fileCache;
-
 
     // 每次加载的消息条数
     private static final int PAGE_LENGTH = 5;
@@ -153,8 +151,6 @@ public class ChatPanel extends ParentAvailablePanel
         setListeners();
 
         initData();
-
-        fileCache = new FileCache();
 
         if (OSUtil.getOsType() == OSUtil.Mac_OS)
         {
@@ -1515,7 +1511,7 @@ public class ChatPanel extends ParentAvailablePanel
                                     {
                                         holder.progressBar.setVisible(false);
                                         holder.sizeLabel.setVisible(true);
-                                        holder.sizeLabel.setText(fileCache.fileSizeString(uploadFilename));
+                                        holder.sizeLabel.setText(FileCache.fileSizeString(uploadFilename));
 
                                         // todo 更新消息的最后更新时间
                                         dbMessage.setProgress(100);
@@ -1659,7 +1655,7 @@ public class ChatPanel extends ParentAvailablePanel
             return;
         }
 
-        String filepath = fileCache.tryGetFileCache(fileAttachment.getId(), fileAttachment.getTitle());
+        String filepath = FileCache.tryGetFileCache(fileAttachment.getId(), fileAttachment.getTitle());
         if (filepath == null)
         {
             // 服务器上的文件
@@ -1730,7 +1726,7 @@ public class ChatPanel extends ParentAvailablePanel
             public void onSuccess(byte[] data)
             {
                 //System.out.println(data);
-                String path = fileCache.cacheFile(fileAttachment.getId(), fileAttachment.getTitle(), data);
+                String path = FileCache.cacheFile(fileAttachment.getId(), fileAttachment.getTitle(), data);
 
                 int pos = findMessageItemPositionInViewReverse(messageId);
                 MessageAttachmentViewHolder holder = (MessageAttachmentViewHolder) getViewHolderByPosition(pos);
@@ -1748,7 +1744,7 @@ public class ChatPanel extends ParentAvailablePanel
                 {
                     holder.sizeLabel.setVisible(true);
                     System.out.println("文件已缓存在 " + path);
-                    holder.sizeLabel.setText(fileCache.fileSizeString(path));
+                    holder.sizeLabel.setText(FileCache.fileSizeString(path));
                     uploadingOrDownloadingFiles.remove(fileAttachment.getId());
                 }
             }

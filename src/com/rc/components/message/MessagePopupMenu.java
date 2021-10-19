@@ -33,8 +33,6 @@ import java.util.Map;
 public class MessagePopupMenu extends JPopupMenu
 {
     private int messageType;
-    private ImageCache imageCache = new ImageCache();
-    private FileCache fileCache = new FileCache();
     private FileAttachmentService fileAttachmentService = Launcher.fileAttachmentService;
 
     private JMenuItem item1 = new JMenuItem("复制");
@@ -82,7 +80,7 @@ public class MessagePopupMenu extends JPopupMenu
                             Map map = (Map) obj;
                             String id = (String) map.get("attachmentId");
                             String url = (String) map.get("url");
-                            imageCache.requestOriginalAsynchronously(id, url, new ImageCache.ImageCacheRequestListener()
+                            ImageCache.requestOriginalAsynchronously(id, url, new ImageCache.ImageCacheRequestListener()
                             {
                                 @Override
                                 public void onSuccess(ImageIcon icon, String path)
@@ -118,7 +116,7 @@ public class MessagePopupMenu extends JPopupMenu
                             String id = (String) map.get("attachmentId");
                             String name = (String) map.get("name");
 
-                            String path = fileCache.tryGetFileCache(id, name);
+                            String path = FileCache.tryGetFileCache(id, name);
                             if (path != null && !path.isEmpty())
                             {
                                 ClipboardUtil.copyFile(path);
@@ -235,7 +233,7 @@ public class MessagePopupMenu extends JPopupMenu
                             Map map = (Map) obj;
                             String id = (String) map.get("attachmentId");
                             String url = (String) map.get("url");
-                            imageCache.requestOriginalAsynchronously(id, url, new ImageCache.ImageCacheRequestListener()
+                            ImageCache.requestOriginalAsynchronously(id, url, new ImageCache.ImageCacheRequestListener()
                             {
                                 @Override
                                 public void onSuccess(ImageIcon icon, String path)
@@ -271,7 +269,7 @@ public class MessagePopupMenu extends JPopupMenu
                             String id = (String) map.get("attachmentId");
                             String name = (String) map.get("name");
 
-                            String path = fileCache.tryGetFileCache(id, name);
+                            String path = FileCache.tryGetFileCache(id, name);
                             if (path != null && !path.isEmpty())
                             {
                                 saveAsFile(path);

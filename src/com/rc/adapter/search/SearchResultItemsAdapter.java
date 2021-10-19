@@ -45,7 +45,6 @@ public class SearchResultItemsAdapter extends BaseAdapter<SearchResultItemViewHo
     public static final int VIEW_TYPE_FILE = 2;
     private MessageService messageService = Launcher.messageService;
     private AttachmentIconHelper attachmentIconHelper = new AttachmentIconHelper();
-    private FileCache fileCache = new FileCache();
     private FileAttachmentService fileAttachmentService = Launcher.fileAttachmentService;
     private CurrentUser currentUser;
     private CurrentUserService currentUserService = Launcher.currentUserService;
@@ -169,10 +168,10 @@ public class SearchResultItemsAdapter extends BaseAdapter<SearchResultItemViewHo
 
         holder.name.setText(filename);
 
-        String filePath = fileCache.tryGetFileCache(item.getId(), item.getName());
+        String filePath = FileCache.tryGetFileCache(item.getId(), item.getName());
         if (filePath != null)
         {
-            holder.size.setText(fileCache.fileSizeString(filePath));
+            holder.size.setText(FileCache.fileSizeString(filePath));
         }
         else
         {
@@ -476,7 +475,7 @@ public class SearchResultItemsAdapter extends BaseAdapter<SearchResultItemViewHo
             return;
         }
 
-        String filepath = fileCache.tryGetFileCache(fileAttachment.getId(), fileAttachment.getTitle());
+        String filepath = FileCache.tryGetFileCache(fileAttachment.getId(), fileAttachment.getTitle());
         if (filepath == null)
         {
             // 服务器上的文件
@@ -549,7 +548,7 @@ public class SearchResultItemsAdapter extends BaseAdapter<SearchResultItemViewHo
             {
                 SearchResultFileItemViewHolder holder = fileItemViewHolders.get(fileAttachment.getId());
 
-                String path = fileCache.cacheFile(fileAttachment.getId(), fileAttachment.getTitle(), data);
+                String path = FileCache.cacheFile(fileAttachment.getId(), fileAttachment.getTitle(), data);
 
                 if (path == null)
                 {
@@ -561,7 +560,7 @@ public class SearchResultItemsAdapter extends BaseAdapter<SearchResultItemViewHo
                 {
                     holder.size.setVisible(true);
                     System.out.println("文件已缓存在 " + path);
-                    holder.size.setText(fileCache.fileSizeString(path));
+                    holder.size.setText(FileCache.fileSizeString(path));
                     downloadingFiles.remove(fileAttachment.getId());
                 }
             }

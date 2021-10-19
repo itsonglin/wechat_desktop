@@ -742,7 +742,6 @@ public class ScreenShotFrame extends JFrame
         {
             Robot robot = new Robot(screen);
             image = robot.createScreenCapture(new Rectangle(0, 0, d.width, d.height));
-
             maxWidth = image.getWidth();
             maxHeight = image.getHeight();
         } catch (AWTException e)

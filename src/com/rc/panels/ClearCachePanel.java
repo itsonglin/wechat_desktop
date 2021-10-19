@@ -24,8 +24,6 @@ public class ClearCachePanel extends JPanel
 {
     private JLabel infoLabel;
     private RCButton clearButton;
-    private String fileCachePath;
-    private String imageCachePath;
 
     public ClearCachePanel()
     {
@@ -53,8 +51,8 @@ public class ClearCachePanel extends JPanel
                         {
                             try
                             {
-                                deleteAllFiles(fileCachePath);
-                                deleteAllFiles(imageCachePath);
+                                deleteAllFiles(FileCache.FILE_CACHE_ROOT_PATH);
+                                deleteAllFiles(ImageCache.IMAGE_CACHE_ROOT_PATH);
 
                                 clearButton.setText("缓存清理完成！");
                                 clearButton.setIcon(IconUtil.getIcon(this, "/image/check.png"));
@@ -94,11 +92,8 @@ public class ClearCachePanel extends JPanel
             @Override
             public void run()
             {
-                fileCachePath = new FileCache().FILE_CACHE_ROOT_PATH;
-                imageCachePath = new ImageCache().IMAGE_CACHE_ROOT_PATH;
-
-                long size = getDirectorySize(fileCachePath);
-                size += getDirectorySize(imageCachePath);
+                long size = getDirectorySize(FileCache.FILE_CACHE_ROOT_PATH);
+                size += getDirectorySize(ImageCache.IMAGE_CACHE_ROOT_PATH);
 
                 infoLabel.setText("当前缓存占用磁盘空间：" + fileSizeString(size));
             }
@@ -107,23 +102,7 @@ public class ClearCachePanel extends JPanel
 
     private String fileSizeString(long size)
     {
-        DecimalFormat decimalFormat = new DecimalFormat("#.0");
-
-        String retString = "";
-        if (size < 1024)
-        {
-            retString = size + " 字节";
-        }
-        else if (size < 1024 * 1024)
-        {
-            retString = decimalFormat.format(size * 1.0F / 1024) + " KB";
-        }
-        else
-        {
-            retString = decimalFormat.format(size * 1.0F / 1024 / 1024) + " MB";
-        }
-
-        return retString;
+        return FileCache.prettySizeString(size);
     }
 
     /**
