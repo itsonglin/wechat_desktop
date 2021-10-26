@@ -1,5 +1,7 @@
 .idea/
 out/*
+logs/*
+target/*
 *.db
 *.iml
 .DS_Store
