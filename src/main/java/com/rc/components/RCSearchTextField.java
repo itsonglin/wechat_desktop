@@ -1,6 +1,8 @@
 package com.rc.components;
 
 import com.rc.utils.FontUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -13,7 +15,7 @@ import java.awt.geom.RoundRectangle2D;
  */
 public class RCSearchTextField extends JTextField
 {
-
+    Logger logger = LoggerFactory.getLogger(RCSearchTextField.class);
     private RoundRectangle2D.Double shape;
 
     public RCSearchTextField()
@@ -63,6 +65,7 @@ public class RCSearchTextField extends JTextField
     @Override
     protected void paintComponent(java.awt.Graphics g)
     {
+        logger.info("111");
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
