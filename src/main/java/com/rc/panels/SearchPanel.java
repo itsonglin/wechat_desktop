@@ -61,7 +61,7 @@ import java.util.List;
 public class SearchPanel extends ParentAvailablePanel
 {
     private static SearchPanel context;
-    private RCSearchTextField searchTextField;
+    private RCSearchPanel searchTextField;
     private JButton createGroupButton;
 
     private RoomService roomService = Launcher.roomService;
@@ -85,7 +85,7 @@ public class SearchPanel extends ParentAvailablePanel
 
     private void initComponent()
     {
-        searchTextField = new RCSearchTextField();
+        searchTextField = new RCSearchPanel();
         createGroupButton = new RCButton("", Colors.BG_GRAY_DARKER, Colors.LIGHT_GRAY, Colors.LIGHT_GRAY);
         //createGroupButton.setBorder(new LineBorder(Colors.BG_GRAY_DARKER, 6, true));
         createGroupButton.setPreferredSize(new Dimension(28, 28));
