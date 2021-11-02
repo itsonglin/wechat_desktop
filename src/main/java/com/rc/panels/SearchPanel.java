@@ -16,6 +16,7 @@ import com.rc.frames.CreateGroupDialog;
 import com.rc.utils.IconUtil;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
@@ -58,7 +59,7 @@ import java.util.List;
  * │                        │                                                └─────┘ │
  * └────────────────────────┴────────────────────────────────────────────────────────┘
  */
-public class SearchPanel extends ParentAvailablePanel
+public class SearchPanel extends BasePanel
 {
     private static SearchPanel context;
     private RCSearchPanel searchTextField;
@@ -76,24 +77,21 @@ public class SearchPanel extends ParentAvailablePanel
     {
         super(parent);
         context = this;
-
-        initComponent();
-        initView();
-        setListeners();
     }
 
 
-    private void initComponent()
+    protected void initComponents()
     {
-        searchTextField = new RCSearchPanel();
-        createGroupButton = new RCButton("", Colors.BG_GRAY_DARKER, Colors.LIGHT_GRAY, Colors.LIGHT_GRAY);
+        searchTextField = new RCSearchPanel(this);
+        createGroupButton = new RCButton("", Colors.BG_GRAY, Colors.LIGHT_GRAY, Colors.LIGHT_GRAY);
         //createGroupButton.setBorder(new LineBorder(Colors.BG_GRAY_DARKER, 6, true));
-        createGroupButton.setPreferredSize(new Dimension(28, 28));
-        createGroupButton.setIcon(IconUtil.getIcon(this, "/image/add_member.png", 18, 18));
-        createGroupButton.setBackground(Colors.BG_GRAY_DARKER);
+        createGroupButton.setPreferredSize(new Dimension(25, 25));
+        createGroupButton.setBorder(null);
+        createGroupButton.setIcon(IconUtil.getIcon(this, "/image/create_group.png", 25, 25));
+        //createGroupButton.setBackground(Colors.BG_GRAY_DARKER);
     }
 
-    private void initView()
+    protected void initView()
     {
         setBackground(Colors.BG_GRAY);
         this.setLayout(new GridBagLayout());
@@ -113,7 +111,7 @@ public class SearchPanel extends ParentAvailablePanel
         return context;
     }
 
-    private void setListeners()
+    protected void setListeners()
     {
         searchTextField.getDocument().addDocumentListener(new DocumentListener()
         {

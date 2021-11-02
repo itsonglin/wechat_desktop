@@ -325,7 +325,8 @@ public class SearchResultItemsAdapter extends BaseAdapter<SearchResultItemViewHo
     private void clearSearchText()
     {
         ListPanel.getContext().showPanel(ListPanel.CHAT);
-        SearchPanel.getContext().clearSearchText();
+        SearchPanel searchPanel = SearchPanel.getContext();
+        searchPanel.clearSearchText();
     }
 
     /**

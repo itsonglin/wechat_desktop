@@ -30,7 +30,6 @@ public class Colors
     public static final Color SCROLL_BAR_THUMB = new Color(122, 122, 122);
 
     public static Color BG_GRAY = new Color(234, 232, 231);
-    public static Color BG_GRAY_2 = new Color(226, 224, 223);
     public static Color BG_GRAY_DARKER = new Color(219, 217, 216);
     public static Color ITEM_SELECTED = new Color(200, 199, 199);
 

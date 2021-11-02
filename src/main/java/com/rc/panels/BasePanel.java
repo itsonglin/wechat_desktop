@@ -1,6 +1,7 @@
 package com.rc.panels;
 
 import javax.swing.*;
+import java.util.Map;
 
 /**
  * @author song
@@ -8,13 +9,22 @@ import javax.swing.*;
  * @description
  * @since
  */
-public abstract class BasePanel extends JPanel
+public abstract class BasePanel extends ParentAvailablePanel
 {
-    public BasePanel()
+
+    public BasePanel(JPanel parent)
     {
+        super(parent);
         this.initComponents();
         this.initView();
+        this.setListeners();
     }
+
     protected abstract void initComponents();
+
     protected abstract void initView();
+
+    protected void setListeners()
+    {
+    }
 }

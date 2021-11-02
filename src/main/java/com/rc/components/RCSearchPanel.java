@@ -4,7 +4,6 @@ import com.rc.panels.BasePanel;
 import com.rc.utils.FontUtil;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.text.Document;
 import java.awt.*;
 
@@ -18,6 +17,11 @@ import java.awt.*;
 public class RCSearchPanel extends BasePanel
 {
     private JTextField textField;
+
+    public RCSearchPanel(JPanel parent)
+    {
+        super(parent);
+    }
 
     @Override
     protected void initComponents()
