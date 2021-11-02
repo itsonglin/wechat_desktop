@@ -4,6 +4,8 @@ import com.rc.components.*;
 import com.rc.frames.MainFrame;
 import com.rc.listener.AbstractMouseListener;
 import com.rc.listener.WindowMouseListener;
+import com.rc.res.Colors;
+import com.rc.res.Cursors;
 import com.rc.utils.*;
 
 import javax.swing.*;
@@ -179,7 +181,6 @@ public class TitlePanel extends ParentAvailablePanel
 
     private void initComponents()
     {
-        Cursor handCursor = new Cursor(Cursor.HAND_CURSOR);
         maxIcon = new ImageIcon(getClass().getResource("/image/window_max.png"));
         restoreIcon = new ImageIcon(getClass().getResource("/image/window_restore.png"));
 
@@ -198,7 +199,7 @@ public class TitlePanel extends ParentAvailablePanel
         roomInfoButton = new JLabel();
         roomInfoButton.setIcon(new ImageIcon(getClass().getResource("/image/options.png")));
         roomInfoButton.setHorizontalAlignment(JLabel.CENTER);
-        roomInfoButton.setCursor(handCursor);
+        roomInfoButton.setCursor(Cursors.HAND_CURSOR);
         roomInfoButton.setVisible(false);
 
 
@@ -220,7 +221,7 @@ public class TitlePanel extends ParentAvailablePanel
         closeLabel.setOpaque(true);
         closeLabel.addMouseListener(listener);
         closeLabel.setPreferredSize(controlLabelSize);
-        closeLabel.setCursor(handCursor);
+        closeLabel.setCursor(Cursors.HAND_CURSOR);
         closeLabel.setBackground(Colors.WINDOW_BACKGROUND);
 
         maxLabel = new JLabel();
@@ -229,7 +230,7 @@ public class TitlePanel extends ParentAvailablePanel
         maxLabel.setOpaque(true);
         maxLabel.addMouseListener(listener);
         maxLabel.setPreferredSize(controlLabelSize);
-        maxLabel.setCursor(handCursor);
+        maxLabel.setCursor(Cursors.HAND_CURSOR);
         maxLabel.setBackground(Colors.WINDOW_BACKGROUND);
 
         minLabel = new JLabel();
@@ -238,7 +239,7 @@ public class TitlePanel extends ParentAvailablePanel
         minLabel.setOpaque(true);
         minLabel.addMouseListener(listener);
         minLabel.setPreferredSize(controlLabelSize);
-        minLabel.setCursor(handCursor);
+        minLabel.setCursor(Cursors.HAND_CURSOR);
         minLabel.setBackground(Colors.WINDOW_BACKGROUND);
     }
 

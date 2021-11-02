@@ -2,7 +2,7 @@ package com.rc.adapter.search;
 
 import com.rc.adapter.BaseAdapter;
 import com.rc.app.Launcher;
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.db.model.CurrentUser;
 import com.rc.db.model.FileAttachment;
 import com.rc.db.model.Message;

@@ -1,13 +1,12 @@
 package com.rc.panels;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.RCButton;
 import com.rc.components.VerticalFlowLayout;
 import com.rc.db.model.CurrentUser;
 import com.rc.frames.SystemConfigDialog;
 import com.rc.utils.AvatarUtil;
 import com.rc.utils.IconUtil;
-import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

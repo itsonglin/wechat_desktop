@@ -1,18 +1,15 @@
 package com.rc.panels.collections;
 
 import com.rc.app.Launcher;
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.RCListView;
 import com.rc.db.service.CollectionService;
-import com.rc.frames.SystemConfigDialog;
 import com.rc.panels.ParentAvailablePanel;
 import com.rc.utils.FontUtil;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 
 /**

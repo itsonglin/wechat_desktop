@@ -1,8 +1,9 @@
 package com.rc.frames;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.ImageLabel;
 import com.rc.components.RCMenuItemUI;
+import com.rc.res.Cursors;
 import com.rc.utils.IconUtil;
 import com.rc.utils.OSUtil;
 
@@ -123,7 +124,6 @@ public class ImageViewerFrame extends JFrame
             getRootPane().setBorder(new LineBorder(new Color(204, 204, 204)));
 
             Dimension controlLabelSize = new Dimension(30, 30);
-            Cursor handCursor = new Cursor(Cursor.HAND_CURSOR);
             maxIcon = new ImageIcon(getClass().getResource("/image/window_max.png"));
             restoreIcon = new ImageIcon(getClass().getResource("/image/window_restore.png"));
             ControlLabelMouseListener listener = new ControlLabelMouseListener();
@@ -134,7 +134,7 @@ public class ImageViewerFrame extends JFrame
             closeLabel.setOpaque(true);
             closeLabel.addMouseListener(listener);
             closeLabel.setPreferredSize(controlLabelSize);
-            closeLabel.setCursor(handCursor);
+            closeLabel.setCursor(Cursors.HAND_CURSOR);
 
             maxLabel = new JLabel();
             maxLabel.setIcon(maxIcon);
@@ -142,7 +142,7 @@ public class ImageViewerFrame extends JFrame
             maxLabel.setOpaque(true);
             maxLabel.addMouseListener(listener);
             maxLabel.setPreferredSize(controlLabelSize);
-            maxLabel.setCursor(handCursor);
+            maxLabel.setCursor(Cursors.HAND_CURSOR);
 
             minLabel = new JLabel();
             minLabel.setIcon(new ImageIcon(getClass().getResource("/image/window_min.png")));
@@ -150,7 +150,7 @@ public class ImageViewerFrame extends JFrame
             minLabel.setOpaque(true);
             minLabel.addMouseListener(listener);
             minLabel.setPreferredSize(controlLabelSize);
-            minLabel.setCursor(handCursor);
+            minLabel.setCursor(Cursors.HAND_CURSOR);
 
             controlPanel = new JPanel();
             controlPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));

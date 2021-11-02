@@ -4,7 +4,7 @@ package com.rc.frames;
 import com.apple.eawt.AppEvent;
 import com.apple.eawt.AppForegroundListener;
 import com.apple.eawt.AppReOpenedListener;
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.panels.*;
 import com.rc.utils.ClipboardUtil;
 import com.rc.utils.FontUtil;

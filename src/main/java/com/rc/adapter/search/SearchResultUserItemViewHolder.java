@@ -1,9 +1,8 @@
 package com.rc.adapter.search;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.HighLightLabel;
-import com.rc.components.RCBorder;
 import com.rc.utils.FontUtil;
 
 import javax.swing.*;

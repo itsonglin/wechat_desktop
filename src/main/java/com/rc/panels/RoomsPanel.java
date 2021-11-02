@@ -8,6 +8,7 @@ import com.rc.db.model.Message;
 import com.rc.db.model.Room;
 import com.rc.db.service.RoomService;
 import com.rc.entity.RoomItem;
+import com.rc.res.Colors;
 
 import javax.swing.*;
 import java.awt.*;

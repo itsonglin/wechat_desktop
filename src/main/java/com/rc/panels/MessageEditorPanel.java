@@ -6,6 +6,8 @@ import com.rc.components.message.ChatEditorPopupMenu;
 import com.rc.frames.ScreenShotFrame;
 import com.rc.helper.HotKeyHelper;
 import com.rc.listener.ExpressionListener;
+import com.rc.res.Colors;
+import com.rc.res.Cursors;
 import com.rc.utils.FontUtil;
 import com.rc.utils.IconUtil;
 import com.tulskiy.keymaster.common.HotKey;
@@ -99,7 +101,6 @@ public class MessageEditorPanel extends ParentAvailablePanel
 
     private void initComponents()
     {
-        Cursor handCursor = new Cursor(Cursor.HAND_CURSOR);
         controlPanel = new JPanel();
         controlPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 7));
 
@@ -107,21 +108,21 @@ public class MessageEditorPanel extends ParentAvailablePanel
         fileNormalIcon = IconUtil.getIcon(this, "/image/file.png", false);
         fileActiveIcon = IconUtil.getIcon(this, "/image/file_active.png", false);
         fileLabel.setIcon(fileNormalIcon);
-        fileLabel.setCursor(handCursor);
+        fileLabel.setCursor(Cursors.HAND_CURSOR);
         fileLabel.setToolTipText("发送文件/图片");
 
         expressionLabel = new JLabel();
         emotionNormalIcon = IconUtil.getIcon(this, "/image/emotion.png", false);
         emotionActiveIcon = IconUtil.getIcon(this, "/image/emotion_active.png", false);
         expressionLabel.setIcon(emotionNormalIcon);
-        expressionLabel.setCursor(handCursor);
+        expressionLabel.setCursor(Cursors.HAND_CURSOR);
         expressionLabel.setToolTipText("表情");
 
         cutLabel = new JLabel();
         cutNormalIcon = IconUtil.getIcon(this, "/image/cut.png", false);
         cutActiveIcon = IconUtil.getIcon(this, "/image/cut_active.png", false);
         cutLabel.setIcon(cutNormalIcon);
-        cutLabel.setCursor(handCursor);
+        cutLabel.setCursor(Cursors.HAND_CURSOR);
         cutLabel.setToolTipText("截图(Ctrl + Alt + A)");
 
 

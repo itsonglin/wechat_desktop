@@ -1,6 +1,6 @@
 package com.rc.adapter.message;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.SizeAutoAdjustTextArea;
 import com.rc.components.message.RCRightImageMessageBubble;
@@ -8,7 +8,6 @@ import com.rc.frames.MainFrame;
 import com.rc.utils.FontUtil;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 
 /**

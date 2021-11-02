@@ -1,7 +1,7 @@
 package com.rc.panels;
 
 import com.rc.app.Launcher;
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.RCListView;
 import com.rc.components.message.MainOperationPopupMenu;
@@ -12,6 +12,7 @@ import com.rc.frames.MainFrame;
 import com.rc.frames.SystemConfigDialog;
 import com.rc.listener.AbstractMouseListener;
 import com.rc.listener.WindowMouseListener;
+import com.rc.res.Cursors;
 import com.rc.utils.AvatarUtil;
 import com.rc.utils.FontUtil;
 import com.rc.utils.IconUtil;
@@ -173,7 +174,6 @@ public class NavPanel extends JPanel
 
     private void initComponents()
     {
-        Cursor handCursor = new Cursor(Cursor.HAND_CURSOR);
         List<CurrentUser> users = currentUserService.findAll();
         String currentUsername = null;
         if (users.size() < 1)
@@ -187,7 +187,7 @@ public class NavPanel extends JPanel
 
         avatar = new JLabel();
         avatar.setIcon(new ImageIcon(AvatarUtil.createOrLoadUserAvatar(currentUsername).getScaledInstance(35, 35, Image.SCALE_SMOOTH)));
-        avatar.setCursor(handCursor);
+        avatar.setCursor(Cursors.HAND_CURSOR);
 
         clickListener = new NavPanel.TabItemClickListener();
 
@@ -196,21 +196,21 @@ public class NavPanel extends JPanel
         chatLabel = new JLabel();
         chatLabel.setIcon(chatIconActive);
         chatLabel.setHorizontalAlignment(JLabel.CENTER);
-        chatLabel.setCursor(handCursor);
+        chatLabel.setCursor(Cursors.HAND_CURSOR);
         chatLabel.addMouseListener(clickListener);
 
         newMsgIcon = buildMsgIcon();
-        newMsgIcon.setCursor(handCursor);
+        newMsgIcon.setCursor(Cursors.HAND_CURSOR);
 
         collectionNewMsgIcon = buildMsgIcon();
-        collectionNewMsgIcon.setCursor(handCursor);
+        collectionNewMsgIcon.setCursor(Cursors.HAND_CURSOR);
 
         contactIconNormal = new ImageIcon(getClass().getResource("/image/contacts_normal.png"));
         contactIconActive = new ImageIcon(getClass().getResource("/image/contacts_active.png"));
         contactsLabel = new JLabel();
         contactsLabel.setIcon(contactIconNormal);
         contactsLabel.setHorizontalAlignment(JLabel.CENTER);
-        contactsLabel.setCursor(handCursor);
+        contactsLabel.setCursor(Cursors.HAND_CURSOR);
         contactsLabel.addMouseListener(clickListener);
 
 
@@ -219,13 +219,13 @@ public class NavPanel extends JPanel
         collectionLabel = new JLabel();
         collectionLabel.setIcon(collectionIconNormal);
         collectionLabel.setHorizontalAlignment(JLabel.CENTER);
-        collectionLabel.setCursor(handCursor);
+        collectionLabel.setCursor(Cursors.HAND_CURSOR);
         collectionLabel.addMouseListener(clickListener);
 
         menuIcon = new JLabel();
         menuIcon.setIcon(new ImageIcon(getClass().getResource("/image/options.png")));
         menuIcon.setForeground(Colors.FONT_WHITE);
-        menuIcon.setCursor(handCursor);
+        menuIcon.setCursor(Cursors.HAND_CURSOR);
 
         chatNewMsgPanel = new JPanel();
         chatNewMsgPanel.setLayout(new GridBagLayout());

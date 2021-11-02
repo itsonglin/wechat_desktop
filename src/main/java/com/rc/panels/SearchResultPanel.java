@@ -2,7 +2,7 @@ package com.rc.panels;
 
 import com.rc.adapter.RoomItemViewHolder;
 import com.rc.adapter.search.SearchResultItemsAdapter;
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.RCListView;
 import com.rc.entity.SearchResultItem;

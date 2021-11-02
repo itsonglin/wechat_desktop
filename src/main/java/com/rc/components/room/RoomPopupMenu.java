@@ -3,7 +3,7 @@ package com.rc.components.room;
 import com.rc.adapter.RoomItemViewHolder;
 import com.rc.adapter.RoomItemsAdapter;
 import com.rc.app.Launcher;
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.NotificationTextArea;
 import com.rc.components.RCMenuItemUI;
 import com.rc.db.model.Room;

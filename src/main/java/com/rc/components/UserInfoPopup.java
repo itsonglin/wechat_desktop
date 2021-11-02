@@ -7,6 +7,7 @@ import com.rc.frames.ImageViewerFrame;
 import com.rc.panels.ChatPanel;
 import com.rc.panels.ContactsPanel;
 import com.rc.panels.RoomsPanel;
+import com.rc.res.Colors;
 import com.rc.utils.AvatarUtil;
 import com.rc.utils.FontUtil;
 import javax.swing.*;

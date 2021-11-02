@@ -1,6 +1,6 @@
 package com.rc.panels;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.frames.MainFrame;
 
 import javax.swing.*;

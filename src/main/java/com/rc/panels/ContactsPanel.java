@@ -2,7 +2,7 @@ package com.rc.panels;
 
 import com.rc.adapter.ContactsItemsAdapter;
 import com.rc.app.Launcher;
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.RCListView;
 import com.rc.db.model.ContactsUser;

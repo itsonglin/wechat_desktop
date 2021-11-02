@@ -1,5 +1,7 @@
 package com.rc.components;
 
+import com.rc.res.Colors;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;

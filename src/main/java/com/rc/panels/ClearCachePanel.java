@@ -1,6 +1,6 @@
 package com.rc.panels;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.RCButton;
 import com.rc.utils.FileCache;
@@ -8,12 +8,10 @@ import com.rc.utils.IconUtil;
 import com.rc.utils.ImageCache;
 
 import javax.swing.*;
-import javax.swing.tree.ExpandVetoException;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.text.DecimalFormat;
 
 /**
  * Created by song on 10/07/2017.

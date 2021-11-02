@@ -1,6 +1,6 @@
 package com.rc.components.message;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.RCMenuItemUI;
 import com.rc.components.RCTextEditor;
 import com.rc.utils.ClipboardUtil;

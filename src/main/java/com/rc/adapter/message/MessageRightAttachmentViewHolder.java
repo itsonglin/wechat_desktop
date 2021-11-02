@@ -2,6 +2,7 @@ package com.rc.adapter.message;
 
 import com.rc.components.*;
 import com.rc.components.message.RCRightAttachmentMessageBubble;
+import com.rc.res.Colors;
 
 import javax.swing.*;
 import java.awt.*;

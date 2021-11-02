@@ -6,6 +6,7 @@ import com.rc.db.model.ContactsUser;
 import com.rc.db.service.ContactsUserService;
 import com.rc.entity.SelectUserData;
 import com.rc.panels.SelectUserPanel;
+import com.rc.res.Colors;
 import com.rc.utils.FontUtil;
 
 import javax.swing.*;

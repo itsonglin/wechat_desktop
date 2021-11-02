@@ -1,9 +1,7 @@
 package com.rc.app;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GBC;
-import com.rc.frames.MainFrame;
-import com.rc.panels.ChatPanel;
 import com.rc.panels.MessagePanel;
 import com.rc.utils.FontUtil;
 

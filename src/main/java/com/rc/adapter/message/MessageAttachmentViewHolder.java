@@ -1,6 +1,6 @@
 package com.rc.adapter.message;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GradientProgressBarUI;
 import com.rc.components.RCProgressBar;
 import com.rc.components.SizeAutoAdjustTextArea;

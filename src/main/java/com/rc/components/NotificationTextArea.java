@@ -1,5 +1,6 @@
 package com.rc.components;
 
+import com.rc.res.Colors;
 import com.rc.utils.EmojiUtil;
 import com.vdurmont.emoji.EmojiParser;
 

@@ -1,6 +1,6 @@
 package com.rc.panels;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.RCBorder;
 import com.rc.frames.MainFrame;
@@ -15,7 +15,6 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
 
 /**
  * Created by song on 04/07/2017.

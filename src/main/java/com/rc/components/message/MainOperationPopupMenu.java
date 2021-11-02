@@ -1,6 +1,6 @@
 package com.rc.components.message;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.RCMainOperationMenuItemUI;
 import com.rc.frames.CreateGroupDialog;
 import com.rc.frames.MainFrame;
@@ -9,7 +9,6 @@ import com.rc.utils.IconUtil;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 
 import static com.rc.app.Launcher.APP_NAME;

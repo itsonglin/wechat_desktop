@@ -1,6 +1,6 @@
 package com.rc.panels.expression;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.ScrollUI;
 import com.rc.listener.ExpressionListener;
 import com.rc.panels.ExpressionItem;

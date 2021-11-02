@@ -1,9 +1,7 @@
 package com.rc.panels;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.RCListView;
-import com.rc.components.message.MessagePopupMenu;
-import com.rc.frames.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;

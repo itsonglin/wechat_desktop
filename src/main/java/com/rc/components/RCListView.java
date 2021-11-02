@@ -3,6 +3,7 @@ package com.rc.components;
 import com.rc.adapter.BaseAdapter;
 import com.rc.adapter.HeaderViewHolder;
 import com.rc.adapter.ViewHolder;
+import com.rc.res.Colors;
 
 import javax.swing.*;
 import java.awt.*;

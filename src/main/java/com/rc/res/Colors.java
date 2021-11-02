@@ -1,4 +1,4 @@
-package com.rc.components;
+package com.rc.res;
 
 import java.awt.*;
 

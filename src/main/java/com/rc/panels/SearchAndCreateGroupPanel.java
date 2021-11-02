@@ -13,6 +13,7 @@ import com.rc.db.service.MessageService;
 import com.rc.db.service.RoomService;
 import com.rc.entity.SearchResultItem;
 import com.rc.frames.CreateGroupDialog;
+import com.rc.res.Colors;
 import com.rc.utils.IconUtil;
 
 import javax.swing.*;

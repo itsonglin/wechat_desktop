@@ -1,7 +1,7 @@
 package com.rc.adapter;
 
 import com.rc.app.Launcher;
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.db.model.CurrentUser;
 import com.rc.db.service.ContactsUserService;
 import com.rc.db.service.CurrentUserService;

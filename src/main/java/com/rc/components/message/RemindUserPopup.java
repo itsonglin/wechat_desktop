@@ -1,18 +1,9 @@
 package com.rc.components.message;
 
-import com.rc.adapter.BaseAdapter;
 import com.rc.adapter.ViewHolder;
-import com.rc.adapter.message.MessageSystemMessageViewHolder;
-import com.rc.components.Colors;
-import com.rc.components.RCListView;
-import com.rc.components.RCMenuItemUI;
-import com.rc.components.VerticalFlowLayout;
 import com.rc.utils.AvatarUtil;
-import com.rc.utils.IconUtil;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.List;

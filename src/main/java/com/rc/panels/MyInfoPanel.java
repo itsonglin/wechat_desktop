@@ -1,11 +1,10 @@
 package com.rc.panels;
 
 import com.rc.app.Launcher;
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.message.MainOperationPopupMenu;
 import com.rc.db.service.CurrentUserService;
-import com.rc.frames.MainFrame;
 import com.rc.frames.SystemConfigDialog;
 import com.rc.listener.AbstractMouseListener;
 import com.rc.utils.AvatarUtil;

@@ -1,7 +1,7 @@
 package com.rc.utils;
 
 import com.rc.app.Launcher;
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

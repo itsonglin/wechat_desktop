@@ -1,9 +1,9 @@
 package com.rc.frames;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.panels.ChatPanel;
+import com.rc.res.Cursors;
 import com.rc.utils.*;
-import com.sun.deploy.panel.JSmartTextArea;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -65,7 +65,6 @@ public class ScreenShotFrame extends JFrame
     private Cursor SWresizeCursor;
     private Cursor NEresizeCursor;
     private Cursor SEresizeCursor;
-    private Cursor handCursor;
 
 
     private int mouseDownArea = OUTSIDE_SELECTED;
@@ -123,7 +122,6 @@ public class ScreenShotFrame extends JFrame
         SWresizeCursor = new Cursor(Cursor.SW_RESIZE_CURSOR);
         NEresizeCursor = new Cursor(Cursor.NE_RESIZE_CURSOR);
         SEresizeCursor = new Cursor(Cursor.SE_RESIZE_CURSOR);
-        handCursor = new Cursor(Cursor.HAND_CURSOR);
 
         setCursor(crossCursor);
 
@@ -759,27 +757,27 @@ public class ScreenShotFrame extends JFrame
         controlDialog.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 6));
 
         drawRectLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        drawRectLabel.setCursor(handCursor);
+        drawRectLabel.setCursor(Cursors.HAND_CURSOR);
         drawRectLabel.setToolTipText("绘制矩形");
 
         drawArrowLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        drawArrowLabel.setCursor(handCursor);
+        drawArrowLabel.setCursor(Cursors.HAND_CURSOR);
         drawArrowLabel.setToolTipText("绘制箭头");
 
         drawTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        drawTextLabel.setCursor(handCursor);
+        drawTextLabel.setCursor(Cursors.HAND_CURSOR);
         drawTextLabel.setToolTipText("添加文字");
 
         downloadLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        downloadLabel.setCursor(handCursor);
+        downloadLabel.setCursor(Cursors.HAND_CURSOR);
         downloadLabel.setToolTipText("保存截图");
 
         okLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        okLabel.setCursor(handCursor);
+        okLabel.setCursor(Cursors.HAND_CURSOR);
         okLabel.setToolTipText("确定");
 
         cancelLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        cancelLabel.setCursor(handCursor);
+        cancelLabel.setCursor(Cursors.HAND_CURSOR);
         cancelLabel.setToolTipText("取消");
 
 

@@ -1,6 +1,7 @@
 package com.rc.panels;
 
 import com.rc.components.*;
+import com.rc.res.Colors;
 import com.rc.utils.FontUtil;
 import com.rc.utils.IconUtil;
 import javax.swing.*;

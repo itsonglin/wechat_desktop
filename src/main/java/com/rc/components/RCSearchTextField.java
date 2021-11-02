@@ -1,5 +1,6 @@
 package com.rc.components;
 
+import com.rc.res.Colors;
 import com.rc.utils.FontUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

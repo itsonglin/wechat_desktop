@@ -4,6 +4,7 @@ import com.rc.app.ShadowBorder;
 import com.rc.components.*;
 import com.rc.entity.SelectUserData;
 import com.rc.panels.SelectUserPanel;
+import com.rc.res.Colors;
 import com.rc.utils.FontUtil;
 import com.rc.utils.OSUtil;
 import com.sun.awt.AWTUtilities;

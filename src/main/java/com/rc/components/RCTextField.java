@@ -1,12 +1,12 @@
 package com.rc.components;
 
+import com.rc.res.Colors;
 import com.rc.utils.FontUtil;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
 
 /**
  * Created by song on 17-5-29.

@@ -1,7 +1,6 @@
 package com.rc.components.message;
 
-import com.rc.components.Colors;
-import com.rc.components.RCMenuItemUI;
+import com.rc.res.Colors;
 import com.rc.utils.FontUtil;
 
 import javax.swing.*;

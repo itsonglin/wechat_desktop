@@ -1,6 +1,6 @@
 package com.rc.adapter;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.RCBorder;
 import com.rc.frames.CreateGroupDialog;

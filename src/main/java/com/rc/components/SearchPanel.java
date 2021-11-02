@@ -1,13 +1,18 @@
 package com.rc.components;
 
 import com.rc.panels.BasePanel;
+import com.rc.res.Colors;
+import com.rc.res.Cursors;
 import com.rc.utils.FontUtil;
 import com.rc.utils.IconUtil;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.text.Document;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 /**
@@ -20,6 +25,7 @@ import java.awt.*;
 public class SearchPanel extends BasePanel
 {
     private JLabel iconLabel;
+    private JLabel placeholderLabel;
     private JTextField textField;
 
     public SearchPanel(JPanel parent)
@@ -38,6 +44,11 @@ public class SearchPanel extends BasePanel
         ImageIcon icon = IconUtil.getIcon(this, "/image/search.png", false);
         iconLabel.setIcon(icon);
         iconLabel.setBackground(Color.RED);
+
+        placeholderLabel = new JLabel("搜索");
+        placeholderLabel.setFont(FontUtil.getDefaultFont(14));
+        placeholderLabel.setForeground(Colors.FONT_GRAY);
+        placeholderLabel.setCursor(Cursors.TEXT_CURSOR);
     }
 
     @Override
@@ -45,11 +56,41 @@ public class SearchPanel extends BasePanel
     {
         this.setLayout(new GridBagLayout());
         this.add(iconLabel, new GBC(0, 0).setWeight(1, 1).setFill(GBC.HORIZONTAL).setInsets(2, 3, 0, 0));
-        this.add(textField, new GBC(1, 0).setWeight(1000, 1).setFill(GBC.BOTH).setInsets(2, 4, 2, 5));
+        this.add(placeholderLabel, new GBC(1, 0).setWeight(1, 1).setFill(GBC.HORIZONTAL).setInsets(0, 3, 0, 0));
+        this.add(textField, new GBC(2, 0).setWeight(1000, 1).setFill(GBC.BOTH).setInsets(2, 4, 2, 5));
 
         Color bgColor = new Color(214, 214, 214, 255);
         textField.setBackground(bgColor);
         this.setBorder(new RCRoundBorder(this, bgColor, 1));
+    }
+
+    @Override
+    protected void setListeners()
+    {
+        textField.addFocusListener(new FocusListener()
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                placeholderLabel.setVisible(false);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e)
+            {
+                placeholderLabel.setVisible(true);
+            }
+        });
+
+        placeholderLabel.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                textField.requestFocus();
+                super.mouseClicked(e);
+            }
+        });
     }
 
     public Document getDocument()

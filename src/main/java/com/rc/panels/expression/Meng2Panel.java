@@ -1,26 +1,17 @@
 package com.rc.panels.expression;
 
-import com.rc.components.Colors;
+import com.rc.res.Colors;
 import com.rc.listener.ExpressionListener;
 import com.rc.panels.ExpressionItem;
 import com.rc.utils.IconUtil;
 import com.rc.utils.ImageUtil;
-import com.sun.imageio.plugins.gif.GIFImageReader;
-import com.sun.imageio.plugins.gif.GIFImageReaderSpi;
 
-import javax.imageio.ImageIO;
-import javax.imageio.spi.ImageReaderSpi;
-import javax.imageio.stream.FileImageInputStream;
-import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.*;
-import java.net.URISyntaxException;
 
 /**
  * Created by song on 04/07/2017.

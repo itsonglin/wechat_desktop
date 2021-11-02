@@ -1,7 +1,6 @@
 package com.rc.adapter.message;
 
 import com.rc.adapter.ViewHolder;
-import com.rc.components.Colors;
 import com.rc.panels.MessageTimePanel;
 
 import javax.swing.*;

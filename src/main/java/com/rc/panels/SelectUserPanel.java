@@ -6,6 +6,7 @@ import com.rc.adapter.SelectedUserItemsAdapter;
 import com.rc.components.*;
 import com.rc.entity.SelectUserData;
 import com.rc.listener.AbstractMouseListener;
+import com.rc.res.Colors;
 import com.rc.utils.IconUtil;
 
 import javax.swing.*;

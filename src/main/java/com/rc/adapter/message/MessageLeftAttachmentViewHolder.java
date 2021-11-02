@@ -2,6 +2,7 @@ package com.rc.adapter.message;
 
 import com.rc.components.*;
 import com.rc.components.message.RCLeftImageMessageBubble;
+import com.rc.res.Colors;
 import com.rc.utils.FontUtil;
 
 import javax.swing.*;

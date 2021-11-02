@@ -2,6 +2,8 @@ package com.rc.frames;
 
 import com.rc.components.*;
 import com.rc.panels.*;
+import com.rc.res.Colors;
+import com.rc.res.Cursors;
 import com.rc.utils.FontUtil;
 
 import javax.swing.*;
@@ -48,7 +50,6 @@ public class SystemConfigDialog extends JDialog
 
     public static final int DIALOG_WIDTH = 580;
     public static final int DIALOG_HEIGHT = 500;
-    private Cursor handCursor;
 
 
     public static void display()
@@ -116,9 +117,6 @@ public class SystemConfigDialog extends JDialog
         settingMenuPanel = new JPanel();
         settingAreaPanel = new JPanel();
         settingAreaPanel.setBorder(new RCBorder(RCBorder.LEFT, Colors.SCROLL_BAR_TRACK_LIGHT));
-
-
-        handCursor = new Cursor(Cursor.HAND_CURSOR);
 
         // 设置头像按钮
         changeAvatarLabel = new JLabel("更改头像");
@@ -282,7 +280,7 @@ public class SystemConfigDialog extends JDialog
         label.setBorder(new RCBorder(RCBorder.BOTTOM, Colors.SHADOW));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setPreferredSize(new Dimension(50, 30));
-        label.setCursor(handCursor);
+        label.setCursor(Cursors.HAND_CURSOR);
         label.setOpaque(true);
     }
 
