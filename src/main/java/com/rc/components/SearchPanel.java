@@ -49,6 +49,8 @@ public class SearchPanel extends BasePanel
         placeholderLabel.setFont(FontUtil.getDefaultFont(14));
         placeholderLabel.setForeground(Colors.FONT_GRAY);
         placeholderLabel.setCursor(Cursors.TEXT_CURSOR);
+
+        this.setCursor(Cursors.TEXT_CURSOR);
     }
 
     @Override
