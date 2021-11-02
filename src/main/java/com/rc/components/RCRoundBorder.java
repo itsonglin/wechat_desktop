@@ -1,5 +1,6 @@
 package com.rc.components;
 
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
@@ -11,9 +12,12 @@ import java.awt.*;
  */
 public class RCRoundBorder extends LineBorder
 {
-    public RCRoundBorder(Color color, int thickness)
+    private JComponent component;
+
+    public RCRoundBorder(JComponent component, Color color, int thickness)
     {
         super(color, thickness, true);
+        this.component = component;
     }
 
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height)
@@ -28,6 +32,9 @@ public class RCRoundBorder extends LineBorder
         {
             g2.fillRoundRect(x, y, width, height, 5, 5);
         }
+
+        // 原来画好的内容被上面的fillRoundRect覆盖了, 所以要重绘component的UI
+        component.paintComponents(g);
         g2.dispose();
     }
 }

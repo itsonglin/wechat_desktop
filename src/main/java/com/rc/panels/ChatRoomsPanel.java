@@ -41,7 +41,7 @@ import java.awt.*;
  */
 public class ChatRoomsPanel extends JPanel
 {
-    private SearchPanel searchPanel;
+    private SearchAndCreateGroupPanel searchPanel;
     private ListPanel listPanel;
 
     private static ChatRoomsPanel context;
@@ -55,7 +55,7 @@ public class ChatRoomsPanel extends JPanel
 
     private void initComponents()
     {
-        searchPanel = new SearchPanel(this);
+        searchPanel = new SearchAndCreateGroupPanel(this);
 
         //mainOperationPanel.setBackground(Color.blue);
 

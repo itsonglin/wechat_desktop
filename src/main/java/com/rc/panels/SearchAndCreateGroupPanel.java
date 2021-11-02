@@ -16,7 +16,6 @@ import com.rc.frames.CreateGroupDialog;
 import com.rc.utils.IconUtil;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
@@ -30,39 +29,14 @@ import java.util.List;
 /**
  * Created by song on 17-5-29.
  *
- * <p>下图 #SearchPanel# 对应的位置</p>
+ * 搜索和创建群聊板块
  *
  * 搜索相关文件、消息以及用户、群聊
- *
- * <P>推荐使用Menlo或Consolas字体</P>
- * ┌────────────────────────┬────────────────────────────────────────────────────────┐
- * │ ┌─────┐                │  Room Title                                         ≡  │
- * │ │     │ name         ≡ ├────────────────────────────────────────────────────────┤
- * │ └─────┘                │                                                        │
- * ├────────────────────────┤                     message time                       │
- * │      #SearchPanel#     │  ┌──┐ ┌────────────┐                                   │
- * ├────────────────────────┤  └──┘ │  message   │                                   │
- * │  ▆    │    ▆   │   ▆   │       └────────────┘                                   │
- * ├────────────────────────┤                                                        │
- * │ ┌──┐ name         14:01│                                                        │
- * │ └──┘ message        99+│                     message time                       │
- * ├────────────────────────┤                                    ┌────────────┐ ┌──┐ │
- * │                        │                                    │  message   │ └──┘ │
- * │                        │                                    └────────────┘      │
- * │                        │                                                        │
- * │          Room          │                                                        │
- * │                        ├────────────────────────────────────────────────────────┤
- * │                        │  ▆   ▆   ▆                                             │
- * │          List          │                                                        │
- * │                        │                                                        │
- * │                        │                                                ┌─────┐ │
- * │                        │                                                └─────┘ │
- * └────────────────────────┴────────────────────────────────────────────────────────┘
  */
-public class SearchPanel extends BasePanel
+public class SearchAndCreateGroupPanel extends BasePanel
 {
-    private static SearchPanel context;
-    private RCSearchPanel searchTextField;
+    private static SearchAndCreateGroupPanel context;
+    private SearchPanel searchTextField;
     private JButton createGroupButton;
 
     private RoomService roomService = Launcher.roomService;
@@ -73,7 +47,7 @@ public class SearchPanel extends BasePanel
     private FileAttachmentService fileAttachmentService = Launcher.fileAttachmentService;
 
 
-    public SearchPanel(JPanel parent)
+    public SearchAndCreateGroupPanel(JPanel parent)
     {
         super(parent);
         context = this;
@@ -82,13 +56,11 @@ public class SearchPanel extends BasePanel
 
     protected void initComponents()
     {
-        searchTextField = new RCSearchPanel(this);
+        searchTextField = new SearchPanel(this);
         createGroupButton = new RCButton("", Colors.BG_GRAY, Colors.LIGHT_GRAY, Colors.LIGHT_GRAY);
-        //createGroupButton.setBorder(new LineBorder(Colors.BG_GRAY_DARKER, 6, true));
         createGroupButton.setPreferredSize(new Dimension(25, 25));
         createGroupButton.setBorder(null);
         createGroupButton.setIcon(IconUtil.getIcon(this, "/image/create_group.png", 25, 25));
-        //createGroupButton.setBackground(Colors.BG_GRAY_DARKER);
     }
 
     protected void initView()
@@ -106,7 +78,7 @@ public class SearchPanel extends BasePanel
         );
     }
 
-    public static SearchPanel getContext()
+    public static SearchAndCreateGroupPanel getContext()
     {
         return context;
     }
@@ -119,15 +91,7 @@ public class SearchPanel extends BasePanel
             public void insertUpdate(DocumentEvent e)
             {
                 ListPanel listPanel = ListPanel.getContext();
-                SearchResultPanel searchResultPanel = SearchResultPanel.getContext();
-
-                listPanel.showPanel(ListPanel.SEARCH);
-
-                List<SearchResultItem> data = searchUserOrRoom(searchTextField.getText());
-                searchResultPanel.setData(data);
-                searchResultPanel.setKeyWord(searchTextField.getText());
-                searchResultPanel.notifyDataSetChanged(false);
-                searchResultPanel.getTipLabel().setVisible(false);
+                renderSearchResult(listPanel);
             }
 
             @Override
@@ -140,15 +104,7 @@ public class SearchPanel extends BasePanel
                     return;
                 }
 
-                SearchResultPanel searchResultPanel = SearchResultPanel.getContext();
-
-                listPanel.showPanel(ListPanel.SEARCH);
-
-                List<SearchResultItem> data = searchUserOrRoom(searchTextField.getText());
-                searchResultPanel.setData(data);
-                searchResultPanel.setKeyWord(searchTextField.getText());
-                searchResultPanel.notifyDataSetChanged(false);
-                searchResultPanel.getTipLabel().setVisible(false);
+                renderSearchResult(listPanel);
 
             }
 
@@ -193,6 +149,17 @@ public class SearchPanel extends BasePanel
         });
     }
 
+    private void renderSearchResult(ListPanel listPanel)
+    {
+        SearchResultPanel searchResultPanel = SearchResultPanel.getContext();
+        listPanel.showPanel(ListPanel.SEARCH);
+        List<SearchResultItem> data = searchUserOrRoom(searchTextField.getText());
+        searchResultPanel.setData(data);
+        searchResultPanel.setKeyWord(searchTextField.getText());
+        searchResultPanel.notifyDataSetChanged(false);
+        searchResultPanel.getTipLabel().setVisible(false);
+    }
+
     /**
      * 弹出创建群聊窗口
      */
@@ -200,9 +167,6 @@ public class SearchPanel extends BasePanel
     {
         CreateGroupDialog dialog = new CreateGroupDialog(null, true);
         dialog.setVisible(true);
-
-        /*ShadowBorderDialog shadowBorderDialog = new ShadowBorderDialog(MainFrame.getContext(), true, dialog);
-        shadowBorderDialog.setVisible(true);*/
     }
 
     /**

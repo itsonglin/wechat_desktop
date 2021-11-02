@@ -12,8 +12,6 @@ import com.rc.frames.MainFrame;
 import com.rc.frames.SystemConfigDialog;
 import com.rc.listener.AbstractMouseListener;
 import com.rc.listener.WindowMouseListener;
-import com.rc.panels.collections.BugListPanel;
-import com.rc.panels.collections.TaskListPanel;
 import com.rc.utils.AvatarUtil;
 import com.rc.utils.FontUtil;
 import com.rc.utils.IconUtil;
@@ -287,7 +285,7 @@ public class NavPanel extends JPanel
             {
 
                 // 搜索框内容清空
-                SearchPanel.getContext().clearSearchText();
+                SearchAndCreateGroupPanel.getContext().clearSearchText();
 
                 if (e.getComponent() == chatLabel)
                 {

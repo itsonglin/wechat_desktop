@@ -14,7 +14,7 @@ import com.rc.db.service.RoomService;
 import com.rc.entity.SearchResultItem;
 import com.rc.panels.ChatPanel;
 import com.rc.panels.ListPanel;
-import com.rc.panels.SearchPanel;
+import com.rc.panels.SearchAndCreateGroupPanel;
 import com.rc.helper.AttachmentIconHelper;
 import com.rc.listener.AbstractMouseListener;
 import com.rc.tasks.DownloadTask;
@@ -325,7 +325,7 @@ public class SearchResultItemsAdapter extends BaseAdapter<SearchResultItemViewHo
     private void clearSearchText()
     {
         ListPanel.getContext().showPanel(ListPanel.CHAT);
-        SearchPanel searchPanel = SearchPanel.getContext();
+        SearchAndCreateGroupPanel searchPanel = SearchAndCreateGroupPanel.getContext();
         searchPanel.clearSearchText();
     }
 
