@@ -42,7 +42,7 @@ public class AttachmentIconHelper
                 else
                 {
                     //return new ImageIcon(getClass().getResource("/image/" + mime + ".png"));
-                    return IconUtil.getIcon(this, "/image/" + mime + ".png", width, height);
+                    return IconUtil.getIcon(this, "/image/" + mime + ".png", width, height, true);
 
                 }
             }
@@ -52,7 +52,7 @@ public class AttachmentIconHelper
 
     private ImageIcon unknownMimeIcon(int width, int height)
     {
-        return IconUtil.getIcon(this, "/image/unknown.png", width, height);
+        return IconUtil.getIcon(this, "/image/unknown.png", width, height, true);
     }
 
     private String parseMimeType(String mime)

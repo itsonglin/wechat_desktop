@@ -354,11 +354,11 @@ public class SearchResultItemsAdapter extends BaseAdapter<SearchResultItemViewHo
         {
             if (type.equals("searchMessage"))
             {
-                icon.setImage(IconUtil.getIcon(this, "/image/message.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+                icon.setImage(IconUtil.getIcon(this, "/image/message.png", true).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             }
             else if (type.equals("searchFile"))
             {
-                icon.setImage(IconUtil.getIcon(this, "/image/file_icon.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+                icon.setImage(IconUtil.getIcon(this, "/image/file_icon.png", true).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             }
             /*else if (type.equals("message"))
             {

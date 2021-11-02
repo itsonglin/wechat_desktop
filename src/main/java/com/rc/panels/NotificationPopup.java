@@ -99,7 +99,7 @@ public class NotificationPopup extends JWindow
         avatarLabel.setPreferredSize(new Dimension(50, 50));
         //avatarLabel.setSize(50, 50);
         //avatarLabel.setMinimumSize(new Dimension(50, 50));
-        avatarLabel.setIcon(IconUtil.getIcon(this, "/image/ic_launcher.png", 50, 50));
+        avatarLabel.setIcon(IconUtil.getIcon(this, "/image/ic_launcher.png", 50, 50, true));
 
         roomNameLabel = new RCLabel();
         roomNameLabel.setFont(FontUtil.getDefaultFont(16, Font.BOLD));

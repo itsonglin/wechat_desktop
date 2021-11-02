@@ -35,7 +35,7 @@ public class SearchPanel extends BasePanel
         textField.setFont(FontUtil.getDefaultFont(14));
 
         iconLabel = new JLabel();
-        ImageIcon icon = IconUtil.getIcon(this, "/image/search.png");
+        ImageIcon icon = IconUtil.getIcon(this, "/image/search.png", false);
         iconLabel.setIcon(icon);
         iconLabel.setBackground(Color.RED);
     }

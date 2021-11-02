@@ -42,7 +42,7 @@ public class ClearCachePanel extends JPanel
                 if (clearButton.isEnabled())
                 {
                     clearButton.setText("清除中...");
-                    clearButton.setIcon(IconUtil.getIcon(this, "/image/loading_small.gif"));
+                    clearButton.setIcon(IconUtil.getIcon(this, "/image/loading_small.gif", true));
                     clearButton.setEnabled(false);
                     new Thread(new Runnable()
                     {
@@ -55,7 +55,7 @@ public class ClearCachePanel extends JPanel
                                 deleteAllFiles(ImageCache.IMAGE_CACHE_ROOT_PATH);
 
                                 clearButton.setText("缓存清理完成！");
-                                clearButton.setIcon(IconUtil.getIcon(this, "/image/check.png"));
+                                clearButton.setIcon(IconUtil.getIcon(this, "/image/check.png", true));
                                 infoLabel.setText("当前缓存占用磁盘空间：0 字节");
                             }
                             catch (Exception e)

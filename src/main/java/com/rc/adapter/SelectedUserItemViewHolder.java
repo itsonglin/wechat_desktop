@@ -37,7 +37,7 @@ public class SelectedUserItemViewHolder extends ViewHolder
         username.setFont(FontUtil.getDefaultFont(13));
         username.setForeground(Colors.FONT_BLACK);
 
-        icon.setIcon(IconUtil.getIcon(this, "/image/remove.png", 18, 18));
+        icon.setIcon(IconUtil.getIcon(this, "/image/remove.png", 18, 18, true));
         icon.setToolTipText("移除");
 
         setLayout(new GridBagLayout());

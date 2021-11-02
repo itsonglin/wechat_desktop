@@ -30,7 +30,7 @@ public class AboutPanel extends JPanel
     private void initComponents()
     {
         imageLabel = new JLabel();
-        ImageIcon icon  = IconUtil.getIcon(this, "/image/ic_launcher.png");
+        ImageIcon icon  = IconUtil.getIcon(this, "/image/ic_launcher.png", true);
         imageLabel.setIcon(icon);
 
         versionLabel = new JLabel();

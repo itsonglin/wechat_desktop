@@ -76,19 +76,19 @@ public class ExpressionPopup extends JDialog
         // emoji
         emojiTabPanel = new JPanel();
         emojiTabLabel = new JLabel();
-        emojiTabLabel.setIcon(IconUtil.getIcon(this, "/image/smile.png", 23, 23));
+        emojiTabLabel.setIcon(IconUtil.getIcon(this, "/image/smile.png", 23, 23, false));
         emojiPanel = new EmojiPanel();
 
         // 萌二
         meng2TabPanel = new JPanel();
         meng2TabLabel = new JLabel();
-        meng2TabLabel.setIcon(IconUtil.getIcon(this, "/expression/meng2/meng2.png", 23, 23));
+        meng2TabLabel.setIcon(IconUtil.getIcon(this, "/expression/meng2/meng2.png", 23, 23, false));
         meng2Panel = new Meng2Panel();
 
         // 萌二
         customEmojiTabPanel = new JPanel();
         customEmojiTabLabel = new JLabel();
-        customEmojiTabLabel.setIcon(IconUtil.getIcon(this, "/emoji/heart.png", 23, 23));
+        customEmojiTabLabel.setIcon(IconUtil.getIcon(this, "/emoji/heart.png", 23, 23, false));
         customEmojiPanel = new CustomEmojiPanel();
 
         setBackground(Colors.WINDOW_BACKGROUND);

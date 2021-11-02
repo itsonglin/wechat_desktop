@@ -47,7 +47,7 @@ public class Meng2Panel extends JPanel
             public void mouseEntered(MouseEvent e)
             {
                 ExpressionItem panel = (ExpressionItem) e.getSource();
-                ImageIcon icon = IconUtil.getIcon(this, "/expression/meng2/" + panel.getDisplayName() + ".gif", 50,50, Image.SCALE_FAST);
+                ImageIcon icon = IconUtil.getIcon(this, "/expression/meng2/" + panel.getDisplayName() + ".gif", 50,50, Image.SCALE_FAST, false);
                 panel.setImage(icon);
 
                 panel.setBackground(Colors.SCROLL_BAR_TRACK_LIGHT);

@@ -412,7 +412,7 @@ public class NavPanel extends JPanel
             }
 
             msgIcon.setPreferredSize(new Dimension( fontWidth, 15));
-            msgIcon.setIcon(IconUtil.getIcon(this, "/image/count_bg.png"));
+            msgIcon.setIcon(IconUtil.getIcon(this, "/image/count_bg.png", true));
             msgIcon.setText(txt);
         }
     }

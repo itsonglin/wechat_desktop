@@ -53,7 +53,7 @@ public class TipPanel extends ParentAvailablePanel
     private void initComponents()
     {
         imageLabel = new JLabel();
-        imageLabel.setIcon(IconUtil.getIcon(this, "/image/bg.png", 140, 140));
+        imageLabel.setIcon(IconUtil.getIcon(this, "/image/bg.png", 140, 140, false));
     }
 
     private void initView()

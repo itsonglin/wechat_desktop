@@ -60,7 +60,7 @@ public class SearchAndCreateGroupPanel extends BasePanel
         createGroupButton = new RCButton("", Colors.BG_GRAY, Colors.LIGHT_GRAY, Colors.LIGHT_GRAY);
         createGroupButton.setPreferredSize(new Dimension(25, 25));
         createGroupButton.setBorder(null);
-        createGroupButton.setIcon(IconUtil.getIcon(this, "/image/create_group.png", 25, 25));
+        createGroupButton.setIcon(IconUtil.getIcon(this, "/image/create_group.png", 25, 25, false));
     }
 
     protected void initView()

@@ -27,8 +27,8 @@ public class SelectUserItemsAdapter extends BaseAdapter<SelectUserItemViewHolder
 
     public SelectUserItemsAdapter(List<SelectUserData> userList)
     {
-        checkIcon = IconUtil.getIcon(this, "/image/check.png");
-        uncheckIcon = IconUtil.getIcon(this, "/image/uncheck.png");
+        checkIcon = IconUtil.getIcon(this, "/image/check.png", true);
+        uncheckIcon = IconUtil.getIcon(this, "/image/uncheck.png", true);
         setUserList(userList);
     }
 

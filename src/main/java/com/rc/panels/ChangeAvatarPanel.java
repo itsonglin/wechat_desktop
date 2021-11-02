@@ -99,7 +99,7 @@ public class ChangeAvatarPanel extends JPanel
         statusLabel = new JLabel();
         statusLabel.setText("头像应用成功");
         statusLabel.setForeground(Colors.FONT_GRAY_DARKER);
-        statusLabel.setIcon(IconUtil.getIcon(this, "/image/check.png"));
+        statusLabel.setIcon(IconUtil.getIcon(this, "/image/check.png", true));
         statusLabel.setVisible(false);
 
         contentPanel = new JPanel();
@@ -147,7 +147,7 @@ public class ChangeAvatarPanel extends JPanel
                         return;
                     }
 
-                    okButton.setIcon(IconUtil.getIcon(this, "/image/sending.gif"));
+                    okButton.setIcon(IconUtil.getIcon(this, "/image/sending.gif", true));
                     okButton.setText("应用中...");
 
                     BufferedImage selectedImage = imageLabel.getSelectedImage();

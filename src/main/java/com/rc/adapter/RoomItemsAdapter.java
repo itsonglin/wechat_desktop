@@ -105,7 +105,7 @@ public class RoomItemsAdapter extends BaseAdapter<RoomItemViewHolder>
                 }
 
                 viewHolder.newMsgIcon.setPreferredSize(new Dimension( fontWidth, 15));
-                viewHolder.newMsgIcon.setIcon(IconUtil.getIcon(this, "/image/count_bg.png"));
+                viewHolder.newMsgIcon.setIcon(IconUtil.getIcon(this, "/image/count_bg.png", true));
                 viewHolder.newMsgIcon.setText(txt);
             }
             else
@@ -114,7 +114,7 @@ public class RoomItemsAdapter extends BaseAdapter<RoomItemViewHolder>
                 {
                     briefText = "[" + unread + "条] " + briefText;
                 }
-                viewHolder.newMsgIcon.setIcon(IconUtil.getIcon(this, "/image/count_bg.png", 10, 10));
+                viewHolder.newMsgIcon.setIcon(IconUtil.getIcon(this, "/image/count_bg.png", 10, 10, true));
                 viewHolder.newMsgIcon.setText("");
                 viewHolder.newMsgIcon.setPreferredSize(new Dimension(10, 10));
 
@@ -150,7 +150,7 @@ public class RoomItemsAdapter extends BaseAdapter<RoomItemViewHolder>
             viewHolder.bell.setIcon(null);
         } else
         {
-            viewHolder.bell.setIcon(IconUtil.getIcon(this, "/image/bell.png", 12, 12));
+            viewHolder.bell.setIcon(IconUtil.getIcon(this, "/image/bell.png", 12, 12, true));
         }
 
         /*Graphics  g = viewHolder.getGraphics();

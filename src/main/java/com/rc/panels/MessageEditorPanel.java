@@ -104,22 +104,22 @@ public class MessageEditorPanel extends ParentAvailablePanel
         controlPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 7));
 
         fileLabel = new JLabel();
-        fileNormalIcon = IconUtil.getIcon(this, "/image/file.png");
-        fileActiveIcon = IconUtil.getIcon(this, "/image/file_active.png");
+        fileNormalIcon = IconUtil.getIcon(this, "/image/file.png", false);
+        fileActiveIcon = IconUtil.getIcon(this, "/image/file_active.png", false);
         fileLabel.setIcon(fileNormalIcon);
         fileLabel.setCursor(handCursor);
         fileLabel.setToolTipText("发送文件/图片");
 
         expressionLabel = new JLabel();
-        emotionNormalIcon = IconUtil.getIcon(this, "/image/emotion.png");
-        emotionActiveIcon = IconUtil.getIcon(this, "/image/emotion_active.png");
+        emotionNormalIcon = IconUtil.getIcon(this, "/image/emotion.png", false);
+        emotionActiveIcon = IconUtil.getIcon(this, "/image/emotion_active.png", false);
         expressionLabel.setIcon(emotionNormalIcon);
         expressionLabel.setCursor(handCursor);
         expressionLabel.setToolTipText("表情");
 
         cutLabel = new JLabel();
-        cutNormalIcon = IconUtil.getIcon(this, "/image/cut.png");
-        cutActiveIcon = IconUtil.getIcon(this, "/image/cut_active.png");
+        cutNormalIcon = IconUtil.getIcon(this, "/image/cut.png", false);
+        cutActiveIcon = IconUtil.getIcon(this, "/image/cut_active.png", false);
         cutLabel.setIcon(cutNormalIcon);
         cutLabel.setCursor(handCursor);
         cutLabel.setToolTipText("截图(Ctrl + Alt + A)");

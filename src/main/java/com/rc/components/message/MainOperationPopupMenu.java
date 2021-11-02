@@ -39,7 +39,7 @@ public class MainOperationPopupMenu extends JPopupMenu
                 showCreateGroupDialog();
             }
         });
-        ImageIcon icon1 = IconUtil.getIcon(this, "/image/chat.png", 20, 20);
+        ImageIcon icon1 = IconUtil.getIcon(this, "/image/chat.png", 20, 20, false);
         item1.setIcon(icon1);
         item1.setIconTextGap(5);
 
@@ -54,7 +54,7 @@ public class MainOperationPopupMenu extends JPopupMenu
                 SystemConfigDialog.display();
             }
         });
-        ImageIcon icon2 = IconUtil.getIcon(this, "/image/setting.png",20, 20);
+        ImageIcon icon2 = IconUtil.getIcon(this, "/image/setting.png",20, 20, false);
         item2.setIcon(icon2);
         item2.setIconTextGap(5);
 
@@ -72,7 +72,7 @@ public class MainOperationPopupMenu extends JPopupMenu
                 }
             }
         });
-        ImageIcon icon3 = IconUtil.getIcon(this, "/image/shutdown.png", 18, 20);
+        ImageIcon icon3 = IconUtil.getIcon(this, "/image/shutdown.png", 18, 20, false);
         item3.setIcon(icon3);
         item3.setIconTextGap(5);
 

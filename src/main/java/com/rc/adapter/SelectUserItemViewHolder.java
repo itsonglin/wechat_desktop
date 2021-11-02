@@ -36,7 +36,7 @@ public class SelectUserItemViewHolder extends ViewHolder
         username.setFont(FontUtil.getDefaultFont(13));
         username.setForeground(Colors.FONT_BLACK);
 
-        icon.setIcon(IconUtil.getIcon(this, "/image/uncheck.png"));
+        icon.setIcon(IconUtil.getIcon(this, "/image/uncheck.png", true));
 
         setLayout(new GridBagLayout());
         add(avatar, new GBC(0, 0).setWeight(1, 1).setFill(GBC.BOTH).setInsets(0,5,0,0));

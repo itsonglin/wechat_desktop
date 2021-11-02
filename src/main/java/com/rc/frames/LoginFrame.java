@@ -80,7 +80,7 @@ public class LoginFrame extends JFrame
         //controlPanel.setBounds(0,5, windowWidth, 30);
 
         closeLabel = new JLabel();
-        closeLabel.setIcon(IconUtil.getIcon(this, "/image/close.png"));
+        closeLabel.setIcon(IconUtil.getIcon(this, "/image/close.png", false));
         closeLabel.setHorizontalAlignment(JLabel.CENTER);
         //closeLabel.setPreferredSize(new Dimension(30,30));
         closeLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -118,7 +118,7 @@ public class LoginFrame extends JFrame
         statusLabel.setText("密码不正确");
         statusLabel.setVisible(false);
 
-        setIconImage(IconUtil.getIcon(this, "/image/ic_launcher.png").getImage());
+        setIconImage(IconUtil.getIcon(this, "/image/ic_launcher.png", true).getImage());
     }
 
     private void initView()

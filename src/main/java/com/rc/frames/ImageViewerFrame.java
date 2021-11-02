@@ -115,7 +115,7 @@ public class ImageViewerFrame extends JFrame
         }
 
         imageLabel = new ImageLabel(isGif);
-        setIconImage(IconUtil.getIcon(this, "/image/ic_launcher.png").getImage());
+        setIconImage(IconUtil.getIcon(this, "/image/ic_launcher.png", true).getImage());
 
         if (OSUtil.getOsType() == OSUtil.Windows)
         {

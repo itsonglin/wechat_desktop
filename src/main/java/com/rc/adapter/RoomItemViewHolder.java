@@ -42,7 +42,7 @@ public class RoomItemViewHolder extends ViewHolder
         setOpaque(true);
         setForeground(Colors.FONT_BLACK);
 
-        newMsgIcon.setIcon(IconUtil.getIcon(this, "/image/count_bg.png", 10, 10));
+        newMsgIcon.setIcon(IconUtil.getIcon(this, "/image/count_bg.png", 10, 10, true));
         newMsgIcon.setPreferredSize(new Dimension(10, 10));
         newMsgIcon.setFont(FontUtil.getDefaultFont(12));
         newMsgIcon.setForeground(Colors.FONT_WHITE);
@@ -63,7 +63,7 @@ public class RoomItemViewHolder extends ViewHolder
         brief.setFont(FontUtil.getDefaultFont(13));
         brief.setBackground(Colors.BG_GRAY);
 
-        bell.setIcon(IconUtil.getIcon(this, "/image/bell.png", 12, 12));
+        bell.setIcon(IconUtil.getIcon(this, "/image/bell.png", 12, 12, true));
         bell.setPreferredSize(new Dimension(15, 15));
 
         nameBrief.setLayout(new GridBagLayout());

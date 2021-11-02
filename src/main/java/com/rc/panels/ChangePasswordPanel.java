@@ -143,7 +143,7 @@ public class ChangePasswordPanel extends JPanel
 
             statusLabel.setVisible(false);
             okButton.setEnabled(false);
-            okButton.setIcon(IconUtil.getIcon(this, "/image/sending.gif"));
+            okButton.setIcon(IconUtil.getIcon(this, "/image/sending.gif", true));
             okButton.setText("修改中...");
             //todo 发送修改密码请求
         }
@@ -160,14 +160,14 @@ public class ChangePasswordPanel extends JPanel
     public void showSuccessMessage()
     {
         statusLabel.setText("密码修改成功，请重新登录");
-        statusLabel.setIcon(IconUtil.getIcon(this, "/image/check.png"));
+        statusLabel.setIcon(IconUtil.getIcon(this, "/image/check.png", true));
         statusLabel.setVisible(true);
     }
 
     public void showErrorMessage(String message)
     {
         statusLabel.setText(message);
-        statusLabel.setIcon(new ImageIcon(IconUtil.getIcon(this, "/image/fail.png").getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH)));
+        statusLabel.setIcon(new ImageIcon(IconUtil.getIcon(this, "/image/fail.png", true).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH)));
         statusLabel.setVisible(true);
     }
 

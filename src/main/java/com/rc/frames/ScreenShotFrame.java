@@ -24,12 +24,12 @@ import java.util.*;
 public class ScreenShotFrame extends JFrame
 {
 
-    JLabel drawRectLabel = new JLabel(IconUtil.getIcon(this, "/image/rect.png"));
-    JLabel drawTextLabel = new JLabel(IconUtil.getIcon(this, "/image/c_text.png"));
-    JLabel drawArrowLabel = new JLabel(IconUtil.getIcon(this, "/image/arrow.png"));
-    JLabel okLabel = new JLabel(IconUtil.getIcon(this, "/image/ok.png"));
-    JLabel cancelLabel = new JLabel(IconUtil.getIcon(this, "/image/cancel.png"));
-    JLabel downloadLabel = new JLabel(IconUtil.getIcon(this, "/image/download.png"));
+    JLabel drawRectLabel = new JLabel(IconUtil.getIcon(this, "/image/rect.png", true));
+    JLabel drawTextLabel = new JLabel(IconUtil.getIcon(this, "/image/c_text.png", true));
+    JLabel drawArrowLabel = new JLabel(IconUtil.getIcon(this, "/image/arrow.png", true));
+    JLabel okLabel = new JLabel(IconUtil.getIcon(this, "/image/ok.png", true));
+    JLabel cancelLabel = new JLabel(IconUtil.getIcon(this, "/image/cancel.png", true));
+    JLabel downloadLabel = new JLabel(IconUtil.getIcon(this, "/image/download.png", true));
 
 
     public static boolean visible = false;
@@ -228,7 +228,7 @@ public class ScreenShotFrame extends JFrame
                         addDrawTextPanel(e.getX(), e.getY());
                         drawTextMode = false;
                         drawingText = true;
-                        drawTextLabel.setIcon(IconUtil.getIcon(this, "/image/c_text.png"));
+                        drawTextLabel.setIcon(IconUtil.getIcon(this, "/image/c_text.png", true));
                     }
                 } else if (drawingText)
                 {
@@ -790,7 +790,7 @@ public class ScreenShotFrame extends JFrame
             {
                 if (!drawSignRectangleMode)
                 {
-                    drawRectLabel.setIcon(IconUtil.getIcon(this, "/image/rect.png"));
+                    drawRectLabel.setIcon(IconUtil.getIcon(this, "/image/rect.png", true));
                 }
 
                 super.mouseExited(e);
@@ -799,7 +799,7 @@ public class ScreenShotFrame extends JFrame
             @Override
             public void mouseEntered(MouseEvent e)
             {
-                drawRectLabel.setIcon(IconUtil.getIcon(this, "/image/rect_active.png"));
+                drawRectLabel.setIcon(IconUtil.getIcon(this, "/image/rect_active.png", true));
                 super.mouseEntered(e);
             }
 
@@ -810,8 +810,8 @@ public class ScreenShotFrame extends JFrame
                 drawTextMode = false;
                 drawSignRectangleMode = true;
 
-                drawArrowLabel.setIcon(IconUtil.getIcon(this, "/image/arrow.png"));
-                drawTextLabel.setIcon(IconUtil.getIcon(this, "/image/c_text.png"));
+                drawArrowLabel.setIcon(IconUtil.getIcon(this, "/image/arrow.png", true));
+                drawTextLabel.setIcon(IconUtil.getIcon(this, "/image/c_text.png", true));
                 super.mouseClicked(e);
             }
         });
@@ -823,7 +823,7 @@ public class ScreenShotFrame extends JFrame
             {
                 if (!drawArrowMode)
                 {
-                    drawArrowLabel.setIcon(IconUtil.getIcon(this, "/image/arrow.png"));
+                    drawArrowLabel.setIcon(IconUtil.getIcon(this, "/image/arrow.png", true));
                 }
 
                 super.mouseExited(e);
@@ -832,7 +832,7 @@ public class ScreenShotFrame extends JFrame
             @Override
             public void mouseEntered(MouseEvent e)
             {
-                drawArrowLabel.setIcon(IconUtil.getIcon(this, "/image/arrow_active.png"));
+                drawArrowLabel.setIcon(IconUtil.getIcon(this, "/image/arrow_active.png", true));
                 super.mouseEntered(e);
             }
 
@@ -843,8 +843,8 @@ public class ScreenShotFrame extends JFrame
                 drawTextMode = false;
                 drawArrowMode = true;
 
-                drawRectLabel.setIcon(IconUtil.getIcon(this, "/image/rect.png"));
-                drawTextLabel.setIcon(IconUtil.getIcon(this, "/image/c_text.png"));
+                drawRectLabel.setIcon(IconUtil.getIcon(this, "/image/rect.png", true));
+                drawTextLabel.setIcon(IconUtil.getIcon(this, "/image/c_text.png", true));
 
                 super.mouseClicked(e);
             }
@@ -857,7 +857,7 @@ public class ScreenShotFrame extends JFrame
             {
                 if (!drawTextMode)
                 {
-                    drawTextLabel.setIcon(IconUtil.getIcon(this, "/image/c_text.png"));
+                    drawTextLabel.setIcon(IconUtil.getIcon(this, "/image/c_text.png", true));
                 }
 
                 super.mouseExited(e);
@@ -866,7 +866,7 @@ public class ScreenShotFrame extends JFrame
             @Override
             public void mouseEntered(MouseEvent e)
             {
-                drawTextLabel.setIcon(IconUtil.getIcon(this, "/image/c_text_active.png"));
+                drawTextLabel.setIcon(IconUtil.getIcon(this, "/image/c_text_active.png", true));
                 super.mouseEntered(e);
             }
 
@@ -877,8 +877,8 @@ public class ScreenShotFrame extends JFrame
                 drawArrowMode = false;
                 drawTextMode = true;
 
-                drawRectLabel.setIcon(IconUtil.getIcon(this, "/image/rect.png"));
-                drawArrowLabel.setIcon(IconUtil.getIcon(this, "/image/arrow.png"));
+                drawRectLabel.setIcon(IconUtil.getIcon(this, "/image/rect.png", true));
+                drawArrowLabel.setIcon(IconUtil.getIcon(this, "/image/arrow.png", true));
 
                 super.mouseClicked(e);
             }
@@ -904,14 +904,14 @@ public class ScreenShotFrame extends JFrame
             @Override
             public void mouseEntered(MouseEvent e)
             {
-                downloadLabel.setIcon(IconUtil.getIcon(this, "/image/download_active.png"));
+                downloadLabel.setIcon(IconUtil.getIcon(this, "/image/download_active.png", true));
                 super.mouseEntered(e);
             }
 
             @Override
             public void mouseExited(MouseEvent e)
             {
-                downloadLabel.setIcon(IconUtil.getIcon(this, "/image/download.png"));
+                downloadLabel.setIcon(IconUtil.getIcon(this, "/image/download.png", true));
                 super.mouseExited(e);
             }
         });
@@ -930,14 +930,14 @@ public class ScreenShotFrame extends JFrame
             @Override
             public void mouseEntered(MouseEvent e)
             {
-                okLabel.setIcon(IconUtil.getIcon(this, "/image/ok_active.png"));
+                okLabel.setIcon(IconUtil.getIcon(this, "/image/ok_active.png", true));
                 super.mouseEntered(e);
             }
 
             @Override
             public void mouseExited(MouseEvent e)
             {
-                okLabel.setIcon(IconUtil.getIcon(this, "/image/ok.png"));
+                okLabel.setIcon(IconUtil.getIcon(this, "/image/ok.png", true));
                 super.mouseExited(e);
             }
         });
@@ -953,14 +953,14 @@ public class ScreenShotFrame extends JFrame
             @Override
             public void mouseEntered(MouseEvent e)
             {
-                cancelLabel.setIcon(IconUtil.getIcon(this, "/image/cancel_active.png"));
+                cancelLabel.setIcon(IconUtil.getIcon(this, "/image/cancel_active.png", true));
                 super.mouseEntered(e);
             }
 
             @Override
             public void mouseExited(MouseEvent e)
             {
-                cancelLabel.setIcon(IconUtil.getIcon(this, "/image/cancel.png"));
+                cancelLabel.setIcon(IconUtil.getIcon(this, "/image/cancel.png", true));
                 super.mouseExited(e);
             }
         });

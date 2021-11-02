@@ -560,7 +560,7 @@ public class MessageAdapter extends BaseAdapter<BaseMessageViewHolder>
 
         if (imageIcon == null)
         {
-            imageLabel.setIcon(IconUtil.getIcon(this, "/image/image_loading.gif"));
+            imageLabel.setIcon(IconUtil.getIcon(this, "/image/image_loading.gif", true));
 
             if (isGif)
             {
@@ -579,7 +579,7 @@ public class MessageAdapter extends BaseAdapter<BaseMessageViewHolder>
                     @Override
                     public void onFailed(String why)
                     {
-                        imageLabel.setIcon(IconUtil.getIcon(this, "/image/image_error.png", 64, 64));
+                        imageLabel.setIcon(IconUtil.getIcon(this, "/image/image_error.png", 64, 64, true));
                         holder.revalidate();
                         holder.repaint();
                     }
@@ -603,7 +603,7 @@ public class MessageAdapter extends BaseAdapter<BaseMessageViewHolder>
                     public void onFailed(String why)
                     {
                         System.err.println(imageUrl + " -- " + why);
-                        imageLabel.setIcon(IconUtil.getIcon(this, "/image/image_error.png", 64, 64));
+                        imageLabel.setIcon(IconUtil.getIcon(this, "/image/image_error.png", 64, 64, true));
                         holder.revalidate();
                         holder.repaint();
                     }
