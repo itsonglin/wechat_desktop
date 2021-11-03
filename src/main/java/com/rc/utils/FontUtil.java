@@ -58,7 +58,12 @@ public class FontUtil
 
     public static Font loadFont(String path)
     {
-        try (InputStream is = FontUtil.class.getClass().getResourceAsStream(path))
+        /*System.out.println(FontUtil.class.getClassLoader().getClass().getResourceAsStream(path));
+        System.out.println(FontUtil.class.getResourceAsStream(path));
+
+        System.out.println(FontUtil.class.getClassLoader().getClass().getResourceAsStream("fonts/PingFang-Regular.ttf"));
+        System.out.println(FontUtil.class.getResourceAsStream("fonts/PingFang-Regular.ttf"));*/
+        try (InputStream is = FontUtil.class.getResourceAsStream(path))
         {
             return  Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (FontFormatException e)

@@ -1,6 +1,8 @@
 package com.rc.frames;
 
+import com.rc.app.Launcher;
 import com.rc.components.*;
+import com.rc.db.model.CurrentUser;
 import com.rc.db.service.CurrentUserService;
 import com.rc.listener.AbstractMouseListener;
 import com.rc.res.Colors;

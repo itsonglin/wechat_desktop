@@ -170,7 +170,9 @@ public class Launcher
         // 原来登录过
         if (checkLoginInfo())
         {
-            currentUser = currentUserService.findAll().get(0);
+            //currentUser = currentUserService.findAll().get(0);
+            Launcher.currentUser = new CurrentUser("1", "song", "111", "111", "111", "", "song", "", "");
+
             currentFrame = new MainFrame();
         }
         // 从未登录过
@@ -191,8 +193,9 @@ public class Launcher
 
     private boolean checkLoginInfo()
     {
-        List list = currentUserService.findAll();
-        return  list.size() > 0;
+        /*List list = currentUserService.findAll();
+        return  list.size() > 0;*/
+        return true;
     }
 
     /**
