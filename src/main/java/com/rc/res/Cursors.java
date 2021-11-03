@@ -12,4 +12,5 @@ public class Cursors
 {
     public static Cursor HAND_CURSOR = new Cursor(Cursor.HAND_CURSOR);
     public static Cursor TEXT_CURSOR = new Cursor(Cursor.TEXT_CURSOR);
+    public static Cursor DEFAULT_CURSOR = Cursor.getDefaultCursor();
 }

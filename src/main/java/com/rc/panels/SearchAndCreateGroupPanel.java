@@ -37,7 +37,7 @@ import java.util.List;
 public class SearchAndCreateGroupPanel extends BasePanel
 {
     private static SearchAndCreateGroupPanel context;
-    private SearchPanel searchTextField;
+    private SearchPanel searchPanel;
     private JButton createGroupButton;
 
     private RoomService roomService = Launcher.roomService;
@@ -57,21 +57,22 @@ public class SearchAndCreateGroupPanel extends BasePanel
 
     protected void initComponents()
     {
-        searchTextField = new SearchPanel(this);
         createGroupButton = new RCButton("", Colors.BG_GRAY, Colors.LIGHT_GRAY, Colors.LIGHT_GRAY);
         createGroupButton.setPreferredSize(new Dimension(25, 25));
         createGroupButton.setBorder(null);
         createGroupButton.setIcon(IconUtil.getIcon(this, "/image/create_group.png", 25, 25, false));
+
+        searchPanel = new SearchPanel(this);
     }
 
     protected void initView()
     {
         setBackground(Colors.BG_GRAY);
         this.setLayout(new GridBagLayout());
-        this.add(searchTextField, new GBC(0, 0)
+        this.add(searchPanel, new GBC(0, 0)
                 .setFill(GBC.HORIZONTAL)
-                .setWeight(200, 1)
-                .setInsets(10, 10, 0, 8));
+                .setWeight(130, 1)
+                .setInsets(10, 10, 0, 12));
 
         this.add(createGroupButton, new GBC(1, 0).setInsets(10, 0, 0, 10)
                 //.setFill(GBC.HORIZONTAL)
@@ -86,7 +87,7 @@ public class SearchAndCreateGroupPanel extends BasePanel
 
     protected void setListeners()
     {
-        searchTextField.getDocument().addDocumentListener(new DocumentListener()
+        searchPanel.getDocument().addDocumentListener(new DocumentListener()
         {
             @Override
             public void insertUpdate(DocumentEvent e)
@@ -99,7 +100,7 @@ public class SearchAndCreateGroupPanel extends BasePanel
             public void removeUpdate(DocumentEvent e)
             {
                 ListPanel listPanel = ListPanel.getContext();
-                if (searchTextField.getText() == null || searchTextField.getText().isEmpty())
+                if (searchPanel.getText() == null || searchPanel.getText().isEmpty())
                 {
                     listPanel.showPanel(listPanel.getPreviousTab());
                     return;
@@ -115,7 +116,7 @@ public class SearchAndCreateGroupPanel extends BasePanel
             }
         });
 
-        searchTextField.addKeyListener(new KeyAdapter()
+        searchPanel.addKeyListener(new KeyAdapter()
         {
             @Override
             public void keyPressed(KeyEvent e)
@@ -123,7 +124,7 @@ public class SearchAndCreateGroupPanel extends BasePanel
                 // ESC清除已输入内容
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
                 {
-                    searchTextField.setText("");
+                    searchPanel.setText("");
                 }
 
                 super.keyTyped(e);
@@ -132,7 +133,7 @@ public class SearchAndCreateGroupPanel extends BasePanel
             @Override
             public void keyTyped(KeyEvent e)
             {
-                if (searchTextField.getText().length() > 8)
+                if (searchPanel.getText().length() > 8)
                 {
                     e.consume();
                 }
@@ -154,9 +155,9 @@ public class SearchAndCreateGroupPanel extends BasePanel
     {
         SearchResultPanel searchResultPanel = SearchResultPanel.getContext();
         listPanel.showPanel(ListPanel.SEARCH);
-        List<SearchResultItem> data = searchUserOrRoom(searchTextField.getText());
+        List<SearchResultItem> data = searchUserOrRoom(searchPanel.getText());
         searchResultPanel.setData(data);
-        searchResultPanel.setKeyWord(searchTextField.getText());
+        searchResultPanel.setKeyWord(searchPanel.getText());
         searchResultPanel.notifyDataSetChanged(false);
         searchResultPanel.getTipLabel().setVisible(false);
     }
@@ -175,7 +176,7 @@ public class SearchAndCreateGroupPanel extends BasePanel
      */
     public void clearSearchText()
     {
-        searchTextField.setText("");
+        searchPanel.setText("");
     }
 
 
@@ -205,13 +206,13 @@ public class SearchAndCreateGroupPanel extends BasePanel
                 @Override
                 public void onSearchMessage()
                 {
-                    searchAndListMessage(searchTextField.getText());
+                    searchAndListMessage(searchPanel.getText());
                 }
 
                 @Override
                 public void onSearchFile()
                 {
-                    searchAndListFile(searchTextField.getText());
+                    searchAndListFile(searchPanel.getText());
                 }
             });
 
@@ -344,4 +345,8 @@ public class SearchAndCreateGroupPanel extends BasePanel
         return retList;
     }
 
+    public JButton getCreateGroupButton()
+    {
+        return createGroupButton;
+    }
 }
