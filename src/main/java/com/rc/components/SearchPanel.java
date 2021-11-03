@@ -39,6 +39,7 @@ public class SearchPanel extends BasePanel
     public SearchPanel(JPanel parent)
     {
         super(parent);
+        initialize();
     }
 
     @Override

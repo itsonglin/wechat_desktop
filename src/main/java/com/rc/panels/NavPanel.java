@@ -1,11 +1,11 @@
 package com.rc.panels;
 
 import com.rc.app.Launcher;
+import com.rc.components.VerticalFlowLayout;
 import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.RCListView;
 import com.rc.components.message.MainOperationPopupMenu;
-import com.rc.db.model.CurrentUser;
 import com.rc.db.service.CurrentUserService;
 import com.rc.entity.RoomItem;
 import com.rc.frames.MainFrame;
@@ -29,55 +29,211 @@ import java.util.List;
  * Created by song on 19-9-24.<br/>
  * 导航栏
  */
-public class NavPanel extends JPanel
+public class NavPanel extends BasePanel
 {
     private static NavPanel context;
     private final FontMetrics fontMetrics;
 
-    private JLabel avatar;
+
+    /**
+     * 导航项面板
+     */
+    private JPanel navItemsPanel;
+
+    /**
+     * 导航底部面板
+     */
+    private JPanel bottomPanel;
+
+
+    /**
+     * 头像
+     */
+    private JLabel avatarLabel;
+
+    /**
+     * 聊天
+     */
     private JLabel chatLabel;
+
+    /**
+     * 联系人
+     */
     private JLabel contactsLabel;
+
+
+    /**
+     * 收藏
+     */
     private JLabel collectionLabel;
-    private JLabel menuIcon;
+
+    /**
+     * 菜单
+     */
+    private JLabel menuLabel;
+
     private MainOperationPopupMenu mainOperationPopupMenu;
 
-    public JPanel chatNewMsgPanel;
+    public JPanel chatPanel;
     public JLabel newMsgIcon;
 
-    public JPanel collectionNewMsgPanel;
+    public JPanel collectionPanel;
     public JLabel collectionNewMsgIcon;
 
-
-    private ImageIcon chatIconActive;
-    private ImageIcon chatIconNormal;
-    private ImageIcon contactIconNormal;
-    private ImageIcon contactIconActive;
-    private ImageIcon collectionIconNormal;
-    private ImageIcon collectionIconActive;
-
     private long chatLabelLastClickTime;
-
-    private NavPanel.TabItemClickListener clickListener;
 
     public static final int CHAT = 1;
     public static final int CONTACTS = 2;
     public static final int COLLECTION = 3;
 
+    /**
+     * 当前选中的tab
+     */
+    private int selectedTab = CHAT;
+
     private CurrentUserService currentUserService = Launcher.currentUserService;
 
-    public NavPanel()
+    public NavPanel(JPanel parent)
     {
+        super(parent);
         context = this;
         fontMetrics = getFontMetrics(getFont());
 
-        initComponents();
-        setListeners();
-        initView();
+        initialize();
     }
 
-    private void setListeners()
+    protected void initComponents()
     {
-        menuIcon.addMouseListener(new AbstractMouseListener()
+        navItemsPanel = new JPanel();
+        navItemsPanel.setBackground(Colors.DARK);
+
+        bottomPanel = new JPanel();
+        bottomPanel.setBackground(Colors.DARK);
+
+        avatarLabel = new JLabel();
+        avatarLabel.setIcon(new ImageIcon(AvatarUtil.createOrLoadUserAvatar(Launcher.currentUser.getUsername()).getScaledInstance(35, 35, Image.SCALE_SMOOTH)));
+        avatarLabel.setCursor(Cursors.HAND_CURSOR);
+
+
+        chatLabel = new JLabel();
+        chatLabel.setIcon(IconUtil.getIcon(this, "/image/chat_active.png", true));
+        chatLabel.setHorizontalAlignment(JLabel.CENTER);
+        chatLabel.setCursor(Cursors.HAND_CURSOR);
+
+        newMsgIcon = buildMsgIcon();
+        newMsgIcon.setCursor(Cursors.HAND_CURSOR);
+
+        collectionNewMsgIcon = buildMsgIcon();
+        collectionNewMsgIcon.setCursor(Cursors.HAND_CURSOR);
+
+        contactsLabel = new JLabel();
+        contactsLabel.setIcon(IconUtil.getIcon(this, "/image/contacts_normal.png", true));
+        contactsLabel.setHorizontalAlignment(JLabel.CENTER);
+        contactsLabel.setCursor(Cursors.HAND_CURSOR);
+
+        collectionLabel = new JLabel();
+        collectionLabel.setIcon(IconUtil.getIcon(this, "/image/collection_normal.png", true));
+        collectionLabel.setHorizontalAlignment(JLabel.CENTER);
+        collectionLabel.setCursor(Cursors.HAND_CURSOR);
+
+        menuLabel = new JLabel();
+        menuLabel.setIcon(IconUtil.getIcon(this, "/image/menu_normal.png", true));
+        menuLabel.setCursor(Cursors.HAND_CURSOR);
+        menuLabel.setHorizontalAlignment(JLabel.CENTER);
+
+
+        chatPanel = new JPanel();
+        chatPanel.setBackground(Colors.DARK);
+
+        collectionPanel = new JPanel();
+        collectionPanel.setLayout(new GridBagLayout());
+        collectionPanel.setBackground(Colors.DARK);
+        collectionPanel.add(collectionNewMsgIcon, new GBC(0, 0).setWeight(1, 1).setFill(GBC.VERTICAL).setAnchor(GBC.EAST).setInsets(0, 0, 16, 0));
+        collectionPanel.add(collectionLabel, new GBC(0, 1).setWeight(1, 1).setFill(GBC.BOTH).setInsets(-45, 0, 0, 0));
+
+        mainOperationPopupMenu = new MainOperationPopupMenu();
+    }
+
+    protected void initView()
+    {
+        this.setBackground(Colors.DARK);
+        this.setLayout(new GridBagLayout());
+        this.setPreferredSize(new Dimension(60, MainFrame.DEFAULT_HEIGHT));
+
+        chatPanel.setLayout(new GridBagLayout());
+        chatPanel.add(newMsgIcon, new GBC(0, 0).setWeight(1, 1).setFill(GBC.VERTICAL).setAnchor(GBC.EAST).setInsets(0, 0, 16, 0));
+        chatPanel.add(chatLabel, new GBC(0, 1).setWeight(1, 1).setFill(GBC.BOTH).setInsets(-45, 0, 0, 0));
+
+        navItemsPanel.setLayout(new VerticalFlowLayout(VerticalFlowLayout.TOP, 0, 12, true, false));
+        navItemsPanel.add(chatPanel);
+        navItemsPanel.add(contactsLabel);
+        navItemsPanel.add(collectionPanel);
+
+        bottomPanel.setLayout(new VerticalFlowLayout(VerticalFlowLayout.TOP, 0, 10, true, false));
+        bottomPanel.add(menuLabel);
+
+        add(avatarLabel, new GBC(0, 0).setFill(GBC.NONE).setAnchor(GBC.NORTH).setWeight(1, 1).setInsets(20, 0, 0, 0));
+        add(navItemsPanel, new GBC(0, 1).setFill(GBC.HORIZONTAL).setAnchor(GBC.NORTH).setWeight(10, 100).setInsets(5, 0, 0, 0));
+        add(bottomPanel, new GBC(0, 2).setFill(GBC.BOTH).setAnchor(GBC.SOUTH).setWeight(1, 4).setInsets(10, 0, 0, 0));
+    }
+
+
+    protected void setListeners()
+    {
+        NavPanel.TabItemClickListener  clickListener = new NavPanel.TabItemClickListener();
+        chatLabel.addMouseListener(clickListener);
+        contactsLabel.addMouseListener(clickListener);
+        collectionLabel.addMouseListener(clickListener);
+
+        MouseAdapter mouseEnterExitListener = new MouseAdapter()
+        {
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+                if (e.getComponent() == chatLabel && selectedTab != CHAT)
+                {
+                    chatLabel.setIcon(IconUtil.getIcon(this, "/image/chat_hover.png", true));
+                }
+                else if (e.getComponent() == contactsLabel && selectedTab != CONTACTS)
+                {
+                    contactsLabel.setIcon(IconUtil.getIcon(this, "/image/contacts_hover.png", true));
+                }
+                else if (e.getComponent() == collectionLabel && selectedTab != COLLECTION)
+                {
+                    collectionLabel.setIcon(IconUtil.getIcon(this, "/image/collection_hover.png", true));
+                } else if (e.getComponent() == menuLabel)
+                {
+                    menuLabel.setIcon(IconUtil.getIcon(this, "/image/menu_hover.png", true));
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+                if (e.getComponent() == chatLabel && selectedTab != CHAT)
+                {
+                    chatLabel.setIcon(IconUtil.getIcon(this, "/image/chat_normal.png", true));
+                }
+                else if (e.getComponent() == contactsLabel && selectedTab != CONTACTS)
+                {
+                    contactsLabel.setIcon(IconUtil.getIcon(this, "/image/contacts_normal.png", true));
+                }
+                else if (e.getComponent() == collectionLabel && selectedTab != COLLECTION)
+                {
+                    collectionLabel.setIcon(IconUtil.getIcon(this, "/image/collection_normal.png", true));
+                }
+                else if (e.getComponent() == menuLabel)
+                {
+                    menuLabel.setIcon(IconUtil.getIcon(this, "/image/menu_normal.png", true));
+                }
+            }
+        };
+        chatLabel.addMouseListener(mouseEnterExitListener);
+        contactsLabel.addMouseListener(mouseEnterExitListener);
+        collectionLabel.addMouseListener(mouseEnterExitListener);
+        menuLabel.addMouseListener(mouseEnterExitListener);
+
+        menuLabel.addMouseListener(new AbstractMouseListener()
         {
             @Override
             public void mouseReleased(MouseEvent e)
@@ -92,17 +248,14 @@ public class NavPanel extends JPanel
             }
         });
 
-        avatar.addMouseListener(new MouseAdapter()
+        avatarLabel.addMouseListener(new MouseAdapter()
         {
             @Override
             public void mouseReleased(MouseEvent e)
             {
                 if (e.getButton() == MouseEvent.BUTTON1)
                 {
-                    /*SystemConfigDialog dialog = new SystemConfigDialog(MainFrame.getContext(), true);
-                    dialog.setVisible(true);*/
                     SystemConfigDialog.display();
-
                     super.mouseClicked(e);
                 }
             }
@@ -118,8 +271,7 @@ public class NavPanel extends JPanel
                 {
                     scrollToUnreadRoom();
                     super.mouseClicked(e);
-                }
-                else
+                } else
                 {
                     chatLabelLastClickTime = System.currentTimeMillis();
                 }
@@ -138,7 +290,6 @@ public class NavPanel extends JPanel
     private void scrollToUnreadRoom()
     {
         RCListView roomsListView = RoomsPanel.getContext().getRoomItemsListView();
-        System.out.println(roomsListView.getScrollPosition());
         List<RoomItem> roomItems = RoomsPanel.getContext().getRoomItemList();
         List<Integer> posList = new ArrayList<>();
         for (int i = 0; i < roomItems.size(); i++)
@@ -159,8 +310,7 @@ public class NavPanel extends JPanel
                 if (pos <= currPos)
                 {
                     continue;
-                }
-                else
+                } else
                 {
                     targetPos = pos;
                     break;
@@ -171,78 +321,6 @@ public class NavPanel extends JPanel
         }
     }
 
-
-    private void initComponents()
-    {
-        List<CurrentUser> users = currentUserService.findAll();
-        String currentUsername = null;
-        if (users.size() < 1)
-        {
-            currentUsername = Launcher.currentUser.getUsername();
-        }
-        else
-        {
-            currentUsername = users.get(0).getUsername();
-        }
-
-        avatar = new JLabel();
-        avatar.setIcon(new ImageIcon(AvatarUtil.createOrLoadUserAvatar(currentUsername).getScaledInstance(35, 35, Image.SCALE_SMOOTH)));
-        avatar.setCursor(Cursors.HAND_CURSOR);
-
-        clickListener = new NavPanel.TabItemClickListener();
-
-        chatIconActive = new ImageIcon(getClass().getResource("/image/chat_active.png"));
-        chatIconNormal = new ImageIcon(getClass().getResource("/image/chat_normal.png"));
-        chatLabel = new JLabel();
-        chatLabel.setIcon(chatIconActive);
-        chatLabel.setHorizontalAlignment(JLabel.CENTER);
-        chatLabel.setCursor(Cursors.HAND_CURSOR);
-        chatLabel.addMouseListener(clickListener);
-
-        newMsgIcon = buildMsgIcon();
-        newMsgIcon.setCursor(Cursors.HAND_CURSOR);
-
-        collectionNewMsgIcon = buildMsgIcon();
-        collectionNewMsgIcon.setCursor(Cursors.HAND_CURSOR);
-
-        contactIconNormal = new ImageIcon(getClass().getResource("/image/contacts_normal.png"));
-        contactIconActive = new ImageIcon(getClass().getResource("/image/contacts_active.png"));
-        contactsLabel = new JLabel();
-        contactsLabel.setIcon(contactIconNormal);
-        contactsLabel.setHorizontalAlignment(JLabel.CENTER);
-        contactsLabel.setCursor(Cursors.HAND_CURSOR);
-        contactsLabel.addMouseListener(clickListener);
-
-
-        collectionIconNormal = new ImageIcon(getClass().getResource("/image/me_normal.png"));
-        collectionIconActive = new ImageIcon(getClass().getResource("/image/me_active.png"));
-        collectionLabel = new JLabel();
-        collectionLabel.setIcon(collectionIconNormal);
-        collectionLabel.setHorizontalAlignment(JLabel.CENTER);
-        collectionLabel.setCursor(Cursors.HAND_CURSOR);
-        collectionLabel.addMouseListener(clickListener);
-
-        menuIcon = new JLabel();
-        menuIcon.setIcon(new ImageIcon(getClass().getResource("/image/options.png")));
-        menuIcon.setForeground(Colors.FONT_WHITE);
-        menuIcon.setCursor(Cursors.HAND_CURSOR);
-
-        chatNewMsgPanel = new JPanel();
-        chatNewMsgPanel.setLayout(new GridBagLayout());
-        chatNewMsgPanel.setBackground(Colors.DARK);
-        chatNewMsgPanel.add(newMsgIcon, new GBC(0, 0).setWeight(1, 1).setFill(GBC.VERTICAL).setAnchor(GBC.EAST).setInsets(0, 0, 16, 0));
-        chatNewMsgPanel.add(chatLabel, new GBC(0, 1).setWeight(1, 1).setFill(GBC.BOTH).setInsets(-45, 0, 0, 0));
-
-        collectionNewMsgPanel = new JPanel();
-        collectionNewMsgPanel.setLayout(new GridBagLayout());
-        collectionNewMsgPanel.setBackground(Colors.DARK);
-        collectionNewMsgPanel.add(collectionNewMsgIcon, new GBC(0, 0).setWeight(1, 1).setFill(GBC.VERTICAL).setAnchor(GBC.EAST).setInsets(0, 0, 16, 0));
-
-
-        collectionNewMsgPanel.add(collectionLabel, new GBC(0, 1).setWeight(1, 1).setFill(GBC.BOTH).setInsets(-45, 0, 0, 0));
-
-        mainOperationPopupMenu = new MainOperationPopupMenu();
-    }
 
     private JLabel buildMsgIcon()
     {
@@ -260,20 +338,6 @@ public class NavPanel extends JPanel
         return msgIcon;
     }
 
-    private void initView()
-    {
-        this.setBackground(Colors.DARK);
-        this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(60, MainFrame.DEFAULT_HEIGHT));
-
-
-        add(avatar, new GBC(0, 0).setFill(GBC.NONE).setAnchor(GBC.NORTH).setWeight(1, 1).setInsets(20, 0, 0, 0));
-        add(chatNewMsgPanel, new GBC(0, 1).setFill(GBC.NONE).setAnchor(GBC.NORTH).setWeight(1, 10).setInsets(25, 0, 0, 0).setIpad(25, 25));
-        add(contactsLabel, new GBC(0, 2).setFill(GBC.NONE).setAnchor(GBC.NORTH).setWeight(1, 20).setInsets(15, 0, 0, 0).setIpad(25, 25));
-        add(collectionNewMsgPanel, new GBC(0, 3).setFill(GBC.NONE).setAnchor(GBC.NORTH).setWeight(1, 330).setInsets(10, 0, 0, 2).setIpad(25, 25));
-        add(menuIcon, new GBC(0, 4).setFill(GBC.SOUTH).setAnchor(GBC.NORTH).setWeight(1, 10).setInsets(15, 0, 0, 0));
-
-    }
 
     class TabItemClickListener extends MouseAdapter
     {
@@ -297,7 +361,7 @@ public class NavPanel extends JPanel
                 {
                     show(COLLECTION);
 
-                    //NotificationUtil.show("Swsjxy4PXXJxd8dXk", IconUtil.getIcon(this, "/image/avatar.jpg", 50, 50), "信息技术部", "Jogen", "(后台服务) 自动部署 ZXJ-AbsProjectManagementService-DEV 成功");
+                    //NotificationUtil.show("Swsjxy4PXXJxd8dXk", IconUtil.getIcon(this, "/image/avatarLabel.jpg", 50, 50), "信息技术部", "Jogen", "(后台服务) 自动部署 ZXJ-AbsProjectManagementService-DEV 成功");
 
                     /*if (Math.random() > 0.5)
                     {
@@ -312,16 +376,14 @@ public class NavPanel extends JPanel
         }
     }
 
-    int i = 0;
-
     public void reloadAvatar()
     {
         String currentUsername = currentUserService.findAll().get(0).getUsername();
-        avatar.setIcon(new ImageIcon(AvatarUtil.createOrLoadUserAvatar(currentUsername).getScaledInstance(35, 35, Image.SCALE_SMOOTH)));
+        avatarLabel.setIcon(new ImageIcon(AvatarUtil.createOrLoadUserAvatar(currentUsername).getScaledInstance(35, 35, Image.SCALE_SMOOTH)));
 
 
-        avatar.revalidate();
-        avatar.repaint();
+        avatarLabel.revalidate();
+        avatarLabel.repaint();
     }
 
     public void show(int who)
@@ -330,9 +392,10 @@ public class NavPanel extends JPanel
         {
             case CHAT:
             {
-                chatLabel.setIcon(chatIconActive);
-                contactsLabel.setIcon(contactIconNormal);
-                collectionLabel.setIcon(collectionIconNormal);
+                selectedTab = CHAT;
+                chatLabel.setIcon(IconUtil.getIcon(this, "/image/chat_active.png", true));
+                contactsLabel.setIcon(IconUtil.getIcon(this, "/image/contacts_normal.png", true));
+                collectionLabel.setIcon(IconUtil.getIcon(this, "/image/collection_normal.png", true));
                 ChatRoomsPanel.getContext().getListPanel().showPanel(ListPanel.CHAT);
 
                 if (ChatPanel.CHAT_ROOM_OPEN_ID == null && ChatPanel.CHAT_ROOM_OPEN_ID.isEmpty())
@@ -346,9 +409,10 @@ public class NavPanel extends JPanel
             }
             case CONTACTS:
             {
-                chatLabel.setIcon(chatIconNormal);
-                contactsLabel.setIcon(contactIconActive);
-                collectionLabel.setIcon(collectionIconNormal);
+                selectedTab = CONTACTS;
+                chatLabel.setIcon(IconUtil.getIcon(this, "/image/chat_normal.png", true));
+                contactsLabel.setIcon(IconUtil.getIcon(this, "/image/contacts_active.png", true));
+                collectionLabel.setIcon(IconUtil.getIcon(this, "/image/collection_normal.png", true));
                 ChatRoomsPanel.getContext().getListPanel().showPanel(ListPanel.CONTACTS);
                 RightPanel.getContext().showPanel(RightPanel.TIP);
                 RoomsPanel.getContext().restoreActiveItem();
@@ -358,9 +422,10 @@ public class NavPanel extends JPanel
             }
             case COLLECTION:
             {
-                chatLabel.setIcon(chatIconNormal);
-                contactsLabel.setIcon(contactIconNormal);
-                collectionLabel.setIcon(collectionIconActive);
+                selectedTab = COLLECTION;
+                chatLabel.setIcon(IconUtil.getIcon(this, "/image/chat_normal.png", true));
+                contactsLabel.setIcon(IconUtil.getIcon(this, "/image/contacts_normal.png", true));
+                collectionLabel.setIcon(IconUtil.getIcon(this, "/image/collection_active.png", true));
                 ChatRoomsPanel.getContext().getListPanel().showPanel(ListPanel.COLLECTIONS);
                 RightPanel.getContext().showPanel(RightPanel.TIP);
                 RoomsPanel.getContext().restoreActiveItem();
@@ -379,6 +444,7 @@ public class NavPanel extends JPanel
 
     /**
      * 设置未读消息数
+     *
      * @param count 如果 > 0, 则显示消息气泡, 否则隐藏气泡
      */
     public void setUnreadMessageCount(int count)
@@ -388,6 +454,7 @@ public class NavPanel extends JPanel
 
     /**
      * 设置未读消息数
+     *
      * @param count 如果 > 0, 则显示消息气泡, 否则隐藏气泡
      */
     public void setUnreadCollectionMessageCount(int count)
@@ -401,23 +468,20 @@ public class NavPanel extends JPanel
         {
             msgIcon.setIcon(null);
             msgIcon.setText("");
-        }
-        else
+        } else
         {
-            String txt = count > 99 ? "99+": count + "";
+            String txt = count > 99 ? "99+" : count + "";
             int fontWidth = fontMetrics.stringWidth(txt);
             if (fontWidth < 20)
             {
                 fontWidth += 15;
             }
 
-            msgIcon.setPreferredSize(new Dimension( fontWidth, 15));
+            msgIcon.setPreferredSize(new Dimension(fontWidth, 15));
             msgIcon.setIcon(IconUtil.getIcon(this, "/image/count_bg.png", true));
             msgIcon.setText(txt);
         }
     }
-
-
 
 
 }

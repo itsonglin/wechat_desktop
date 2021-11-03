@@ -52,6 +52,8 @@ public class SearchAndCreateGroupPanel extends BasePanel
     {
         super(parent);
         context = this;
+
+        initialize();
     }
 
 

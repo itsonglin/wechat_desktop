@@ -24,7 +24,7 @@ public class LeftPanel extends JPanel
 
     private void initComponents()
     {
-        navPanel = new NavPanel();
+        navPanel = new NavPanel(this);
         chatRoomsPanel = new ChatRoomsPanel();
     }
 

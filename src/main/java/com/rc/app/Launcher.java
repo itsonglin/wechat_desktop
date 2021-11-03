@@ -170,8 +170,8 @@ public class Launcher
         // 原来登录过
         if (checkLoginInfo())
         {
-            currentFrame = new MainFrame();
             currentUser = currentUserService.findAll().get(0);
+            currentFrame = new MainFrame();
         }
         // 从未登录过
         else

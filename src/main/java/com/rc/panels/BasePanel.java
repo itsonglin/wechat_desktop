@@ -15,6 +15,10 @@ public abstract class BasePanel extends ParentAvailablePanel
     public BasePanel(JPanel parent)
     {
         super(parent);
+    }
+
+    protected  void initialize()
+    {
         this.initComponents();
         this.initView();
         this.setListeners();

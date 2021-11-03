@@ -11,6 +11,7 @@ public class Colors
     public static final Color FONT_BLACK = new Color(0,0,0);
     public static final Color SHADOW = new Color(221, 221, 221);
     public static final Color GROUP_AVATAR_BACKGROUND = new Color(221, 221, 221);
+    public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
     public static Color WINDOW_BACKGROUND = new Color(245, 245, 245);
     public static final Color WINDOW_BACKGROUND_LIGHT = new Color(250, 250, 250);
 
@@ -33,7 +34,7 @@ public class Colors
     public static Color BG_GRAY_DARKER = new Color(219, 217, 216);
     public static Color ITEM_SELECTED = new Color(200, 199, 199);
 
-    public static final Color DARK = new Color(43, 47, 50);
+    public static final Color DARK = new Color(40, 40, 42);
     public static Color HIGH_LIGHT = new Color(195, 58, 0);
     public static Color BLUE = new Color(33, 68, 195);
     public static final Color ORANGE = new Color(206, 104, 47);
