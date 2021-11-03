@@ -90,10 +90,10 @@ public class DbUtils
             tableService.createContactsUserTable();
         }
 
-        if (!tableService.exist("collection"))
+        if (!tableService.exist("collections"))
         {
-            System.out.println("创建表 collection");
-            tableService.createCollectionTable();
+            System.out.println("创建表 collections");
+            tableService.createCollectionsTable();
         }
 
     }

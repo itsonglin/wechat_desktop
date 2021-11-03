@@ -49,9 +49,9 @@ public class TableDao
         session.update("createContactsUserTable");
     }
 
-    public void createCollectionTable()
+    public void createCollectionsTable()
     {
-        session.update("createCollectionTable");
+        session.update("createCollectionsTable");
     }
 
     public void updateTable(){

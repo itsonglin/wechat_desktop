@@ -6,7 +6,7 @@ import java.sql.Date;
  * Created by song on 08/11/2019.
  */
 
-public class Collection extends BasicModel implements Comparable<Collection>
+public class Collections extends BasicModel implements Comparable<Collections>
 {
     private String id;
     private String name;
@@ -77,7 +77,7 @@ public class Collection extends BasicModel implements Comparable<Collection>
     }
 
     @Override
-    public int compareTo(Collection o)
+    public int compareTo(Collections o)
     {
         return this.id.compareTo(o.id);
     }

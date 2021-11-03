@@ -50,8 +50,8 @@ public class TableService
         dao.createContactsUserTable();
     }
 
-    public void createCollectionTable()
+    public void createCollectionsTable()
     {
-        dao.createCollectionTable();
+        dao.createCollectionsTable();
     }
 }

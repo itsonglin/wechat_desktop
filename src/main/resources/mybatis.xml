@@ -12,7 +12,7 @@
         <typeAlias type="com.rc.db.model.FileAttachment" alias="FileAttachment"/>
         <typeAlias type="com.rc.db.model.ImageAttachment" alias="ImageAttachment"/>
         <typeAlias type="com.rc.db.model.ContactsUser" alias="ContactsUser"/>
-        <typeAlias type="com.rc.db.model.Collection" alias="Collection"/>
+        <typeAlias type="com.rc.db.model.Collections" alias="Collections"/>
     </typeAliases>
 
     <!-- development : 开发模式 work : 工作模式 -->
@@ -40,7 +40,7 @@
         <mapper resource="com/rc/db/mapping/FileAttachmentMapper.xml"/>
         <mapper resource="com/rc/db/mapping/ImageAttachmentMapper.xml"/>
         <mapper resource="com/rc/db/mapping/ContactsUserMapper.xml"/>
-        <mapper resource="com/rc/db/mapping/CollectionMapper.xml"/>
+        <mapper resource="com/rc/db/mapping/CollectionsMapper.xml"/>
     </mappers>
 
 
