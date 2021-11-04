@@ -1,11 +1,13 @@
 package com.rc.components;
 
+import com.rc.events.GlobalEventHandler;
 import com.rc.panels.BasePanel;
 import com.rc.panels.SearchAndCreateGroupPanel;
 import com.rc.res.Colors;
 import com.rc.res.Cursors;
 import com.rc.utils.FontUtil;
 import com.rc.utils.IconUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -32,7 +34,7 @@ public class SearchPanel extends BasePanel
     private JTextField textField;
     private JLabel clearLabel;
 
-    private Color normalBgColor ;
+    private Color normalBgColor;
     private Border normalBorder;
     private Border activeBorder;
 
@@ -85,6 +87,24 @@ public class SearchPanel extends BasePanel
     @Override
     public void setListeners()
     {
+        GlobalEventHandler.registermainFrameLoadedListener(source ->
+        {
+
+            new Thread(() ->
+            {
+                try
+                {
+                    Thread.sleep(1);
+                    System.out.println("放弃");
+                    releaseFocus();
+
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }).start();
+        });
+
         textField.addFocusListener(new FocusListener()
         {
             @Override
@@ -102,9 +122,10 @@ public class SearchPanel extends BasePanel
             {
                 textField.setBackground(normalBgColor);
                 SearchPanel.this.setBorder(normalBorder);
-
-                placeholderLabel.setVisible(true);
-                clearLabel.setVisible(false);
+                if (StringUtils.isEmpty(textField.getText()))
+                {
+                    clearLabel.setVisible(false);
+                }
             }
         });
 
@@ -123,8 +144,9 @@ public class SearchPanel extends BasePanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                super.mouseClicked(e);
+                textField.setText("");
                 releaseFocus();
+                super.mouseClicked(e);
             }
 
             @Override
@@ -151,6 +173,8 @@ public class SearchPanel extends BasePanel
     {
         SearchAndCreateGroupPanel parent = (SearchAndCreateGroupPanel) getParentPanel();
         parent.getCreateGroupButton().requestFocus();
+        placeholderLabel.setVisible(true);
+        clearLabel.setVisible(false);
     }
 
     public Document getDocument()

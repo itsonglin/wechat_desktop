@@ -46,6 +46,8 @@ public class MainFrame extends JFrame implements InitComponent
     private boolean trayFlashing = false;
     private AudioStream messageSound; //消息到来时候的提示间
 
+    private boolean firstShown = true;
+
     public MainFrame()
     {
         context = this;
@@ -134,16 +136,16 @@ public class MainFrame extends JFrame implements InitComponent
                 currentWindowHeight = (int) e.getComponent().getBounds().getHeight();
             }
 
-            /*@Override
-            public void componentMoved(ComponentEvent e)
+            @Override
+            public void componentShown(ComponentEvent e)
             {
-                if (ExpressionPopup.context.isVisible())
+                if (firstShown)
                 {
-                    ExpressionPopup.context.setVisible(false);
+                    firstShown = false;
+                    GlobalEventHandler.callMainFrameLoadedListeners(this);
                 }
-
-                super.componentMoved(e);
-            }*/
+                super.componentShown(e);
+            }
         });
 
         if (OSUtil.isMacOS())
