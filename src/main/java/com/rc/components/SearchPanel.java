@@ -43,7 +43,7 @@ public class SearchPanel extends BasePanel
     }
 
     @Override
-    protected void initComponents()
+    public void initComponents()
     {
         normalBgColor = new Color(214, 214, 214, 255);
         normalBorder = new RCRoundBorder(this, normalBgColor, 1);
@@ -70,7 +70,7 @@ public class SearchPanel extends BasePanel
     }
 
     @Override
-    protected void initView()
+    public void initView()
     {
         this.setLayout(new GridBagLayout());
         this.add(iconLabel, new GBC(0, 0).setWeight(1, 1).setFill(GBC.HORIZONTAL).setInsets(2, 3, 0, 0));
@@ -83,7 +83,7 @@ public class SearchPanel extends BasePanel
     }
 
     @Override
-    protected void setListeners()
+    public void setListeners()
     {
         textField.addFocusListener(new FocusListener()
         {

@@ -1,6 +1,8 @@
 package com.rc.utils;
 
 import com.rc.app.Launcher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,6 +20,8 @@ import java.util.UUID;
  */
 public class ClipboardUtil
 {
+    private static Logger logger = LoggerFactory.getLogger(ClipboardUtil.class);
+
     private static Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     public static final String CLIPBOARD_TEMP_DIR;
 
@@ -190,7 +194,7 @@ public class ClipboardUtil
      */
     public static void clearCache()
     {
-        System.out.println("清除剪切板缓存文件...");
+        logger.info("清除剪切板缓存文件...");
         File file = new File(CLIPBOARD_TEMP_DIR);
         File[] files = file.listFiles();
         for (File f : files)

@@ -1,5 +1,7 @@
 package com.rc.panels;
 
+import com.rc.components.InitComponent;
+
 import javax.swing.*;
 import java.util.Map;
 
@@ -9,26 +11,10 @@ import java.util.Map;
  * @description
  * @since
  */
-public abstract class BasePanel extends ParentAvailablePanel
+public abstract class BasePanel extends ParentAvailablePanel implements InitComponent
 {
-
     public BasePanel(JPanel parent)
     {
         super(parent);
-    }
-
-    protected  void initialize()
-    {
-        this.initComponents();
-        this.initView();
-        this.setListeners();
-    }
-
-    protected abstract void initComponents();
-
-    protected abstract void initView();
-
-    protected void setListeners()
-    {
     }
 }

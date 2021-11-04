@@ -153,7 +153,7 @@ public class ChatPanel extends ParentAvailablePanel
 
         initData();
 
-        if (OSUtil.getOsType() == OSUtil.Mac_OS)
+        if (OSUtil.getOsType() == OSUtil.MacOS)
         {
             app = com.apple.eawt.Application.getApplication();
         }
@@ -634,7 +634,7 @@ public class ChatPanel extends ParentAvailablePanel
      */
     public void updateTotalUnreadCount()
     {
-        if (OSUtil.getOsType() == OSUtil.Mac_OS && app != null)
+        if (OSUtil.getOsType() == OSUtil.MacOS && app != null)
         {
             int unreadCount = roomService.totalUnreadCount();
 

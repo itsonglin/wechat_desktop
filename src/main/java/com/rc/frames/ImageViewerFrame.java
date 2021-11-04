@@ -276,7 +276,7 @@ public class ImageViewerFrame extends JFrame
             {
                 h = actualHeight - 2/* - controlPanelHeight - 2*/;
                 w -= 2; // 减去边框
-            } else if (OSUtil.getOsType() == OSUtil.Mac_OS)
+            } else if (OSUtil.getOsType() == OSUtil.MacOS)
             {
                 h = actualHeight - 22;
             }

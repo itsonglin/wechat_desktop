@@ -57,7 +57,7 @@ public class SearchAndCreateGroupPanel extends BasePanel
     }
 
 
-    protected void initComponents()
+    public void initComponents()
     {
         createGroupButton = new RCButton("", Colors.BG_GRAY, Colors.LIGHT_GRAY, Colors.LIGHT_GRAY);
         createGroupButton.setPreferredSize(new Dimension(25, 25));
@@ -67,7 +67,7 @@ public class SearchAndCreateGroupPanel extends BasePanel
         searchPanel = new SearchPanel(this);
     }
 
-    protected void initView()
+    public void initView()
     {
         setBackground(Colors.BG_GRAY);
         this.setLayout(new GridBagLayout());
@@ -82,12 +82,8 @@ public class SearchAndCreateGroupPanel extends BasePanel
         );
     }
 
-    public static SearchAndCreateGroupPanel getContext()
-    {
-        return context;
-    }
 
-    protected void setListeners()
+    public void setListeners()
     {
         searchPanel.getDocument().addDocumentListener(new DocumentListener()
         {
@@ -152,6 +148,12 @@ public class SearchAndCreateGroupPanel extends BasePanel
             }
         });
     }
+    
+    public static SearchAndCreateGroupPanel getContext()
+    {
+        return context;
+    }
+
 
     private void renderSearchResult(ListPanel listPanel)
     {

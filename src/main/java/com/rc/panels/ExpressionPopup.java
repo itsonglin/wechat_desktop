@@ -1,5 +1,7 @@
 package com.rc.panels;
 
+import com.rc.events.GlobalEventHandler;
+import com.rc.events.GlobalEventListener;
 import com.rc.res.Colors;
 import com.rc.components.GBC;
 import com.rc.components.RCBorder;
@@ -148,6 +150,24 @@ public class ExpressionPopup extends JDialog
 
     private void setListeners()
     {
+        // 注册全局点击事件处理器
+        GlobalEventHandler.registerLeftButtonClickedListener(source ->
+        {
+            if (source == ExpressionPopup.context)
+            {
+                return;
+            } else if (source instanceof JComponent && ((JComponent) source).getParent() == ExpressionPopup.context.getListPanel())
+            {
+                return;
+            } else
+            {
+                if (ExpressionPopup.context.isVisible())
+                {
+                    ExpressionPopup.context.setVisible(false);
+                }
+            }
+        });
+
         MouseAdapter adapter = new MouseAdapter()
         {
             @Override

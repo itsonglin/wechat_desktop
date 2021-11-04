@@ -83,7 +83,7 @@ public class CreateGroupDialog extends JDialog
 
         getRootPane().setBorder(new LineBorder(Colors.DIALOG_BORDER));
 
-        /*if (OSUtil.getOsType() != OSUtil.Mac_OS)
+        /*if (OSUtil.getOsType() != OSUtil.MacOS)
         {
             // 边框阴影，但是会导致字体失真
             AWTUtilities.setWindowOpaque(this, false);

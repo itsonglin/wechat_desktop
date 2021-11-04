@@ -1,8 +1,6 @@
 package com.rc.frames;
 
-import com.rc.app.Launcher;
 import com.rc.components.*;
-import com.rc.db.model.CurrentUser;
 import com.rc.db.service.CurrentUserService;
 import com.rc.listener.AbstractMouseListener;
 import com.rc.res.Colors;
@@ -128,7 +126,7 @@ public class LoginFrame extends JFrame
 
         controlPanel.add(closeLabel);
 
-        if (OSUtil.getOsType() != OSUtil.Mac_OS)
+        if (OSUtil.getOsType() != OSUtil.MacOS)
         {
             setUndecorated(true);
             contentPanel.add(controlPanel, new GBC(0, 0).setFill(GBC.BOTH).setWeight(1, 1).setInsets(5, 0, 0, 0));
@@ -190,7 +188,7 @@ public class LoginFrame extends JFrame
             }
         });
 
-        if (OSUtil.getOsType() != OSUtil.Mac_OS)
+        if (OSUtil.getOsType() != OSUtil.MacOS)
         {
             addMouseListener(new MouseAdapter()
             {

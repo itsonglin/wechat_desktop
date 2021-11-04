@@ -22,7 +22,7 @@ public class FontUtil
         {
             font = new Font("微软雅黑", Font.PLAIN, 14);
         }
-        else if (OSUtil.getOsType() == OSUtil.Mac_OS)
+        else if (OSUtil.getOsType() == OSUtil.MacOS)
         {
             font = new Font("PingFang SC", Font.PLAIN, 14);
         }

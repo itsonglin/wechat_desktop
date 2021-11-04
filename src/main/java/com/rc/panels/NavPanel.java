@@ -102,7 +102,7 @@ public class NavPanel extends BasePanel
         initialize();
     }
 
-    protected void initComponents()
+    public void initComponents()
     {
         navItemsPanel = new JPanel();
         navItemsPanel.setBackground(Colors.DARK);
@@ -154,7 +154,7 @@ public class NavPanel extends BasePanel
         mainOperationPopupMenu = new MainOperationPopupMenu();
     }
 
-    protected void initView()
+    public void initView()
     {
         this.setBackground(Colors.DARK);
         this.setLayout(new GridBagLayout());
@@ -178,7 +178,7 @@ public class NavPanel extends BasePanel
     }
 
 
-    protected void setListeners()
+    public void setListeners()
     {
         NavPanel.TabItemClickListener  clickListener = new NavPanel.TabItemClickListener();
         chatLabel.addMouseListener(clickListener);

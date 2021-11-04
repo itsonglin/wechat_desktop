@@ -69,7 +69,7 @@ public class MessageViewHolderCacheHelper
                 initLeftAttachmentViewHolders();
                 initSystemMessageViewHolders();
 
-                System.out.println("初始化MessageHolderCacheHelper花费时间：" + (System.currentTimeMillis() - startTime));
+                //System.out.println("初始化MessageHolderCacheHelper花费时间：" + (System.currentTimeMillis() - startTime));
             }
         }).start();
     }

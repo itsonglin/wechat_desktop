@@ -4,12 +4,11 @@ package com.rc.frames;
 import com.apple.eawt.AppEvent;
 import com.apple.eawt.AppForegroundListener;
 import com.apple.eawt.AppReOpenedListener;
+import com.rc.components.InitComponent;
+import com.rc.events.GlobalEventHandler;
 import com.rc.res.Colors;
 import com.rc.panels.*;
-import com.rc.utils.ClipboardUtil;
-import com.rc.utils.FontUtil;
-import com.rc.utils.IconUtil;
-import com.rc.utils.OSUtil;
+import com.rc.utils.*;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -18,43 +17,18 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.InputStream;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import static com.rc.app.Launcher.APP_NAME;
 
 /**
  * Created by song on 17-5-28.
  * <p>
- * 程序主窗体，包含{@link ChatRoomsPanel} 和 {@link RightPanel}两大部分<br/>
+ * 程序主窗体
  * <p>
  * 实例化时初始化系统托盘以及WebSocket客户端。
- *
- *
- * <P>推荐使用Menlo或Consolas字体</P>
- * ┌────────────────────────┬────────────────────────────────────────────────────────┐
- * │ ┌─────┐                │  Room Title                                         ≡  │
- * │ │     │ name         ≡ ├────────────────────────────────────────────────────────┤
- * │ └─────┘                │                                                        │
- * ├────────────────────────┤                     message time                       │
- * │    search              │  ┌──┐ ┌────────────┐                                   │
- * ├────────────────────────┤  └──┘ │  message   │                                   │
- * │  ▆    │    ▆   │   ▆   │       └────────────┘                                   │
- * ├────────────────────────┤                                                        │
- * │ ┌──┐ name         14:01│                                                        │
- * │ └──┘ message        99+│                     message time                       │
- * ├────────────────────────┤                                    ┌────────────┐ ┌──┐ │
- * │                        │                                    │  message   │ └──┘ │
- * │                        │                                    └────────────┘      │
- * │                        │                                                        │
- * │          Room          │                                                        │
- * │                        ├────────────────────────────────────────────────────────┤
- * │                        │  ▆   ▆   ▆                                             │
- * │          List          │                                                        │
- * │                        │                                                        │
- * │                        │                                                ┌─────┐ │
- * │                        │                                                └─────┘ │
- * └────────────────────────┴────────────────────────────────────────────────────────┘
  */
-public class MainFrame extends JFrame
+public class MainFrame extends JFrame implements InitComponent
 {
     public static int DEFAULT_WIDTH = 800;
     public static int DEFAULT_HEIGHT = 666;
@@ -75,15 +49,144 @@ public class MainFrame extends JFrame
     public MainFrame()
     {
         context = this;
-        initComponents();
-        initView();
         initResource();
+        initialize();
+    }
+
+    public void initComponents()
+    {
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+        // 任务栏图标
+        if (!OSUtil.isMacOS())
+        {
+            setIconImage(IconUtil.getIcon(this, "/image/ic_launcher.png", true).getImage());
+        }
+
+        UIManager.put("Label.font", FontUtil.getDefaultFont());
+        UIManager.put("Panel.font", FontUtil.getDefaultFont());
+        UIManager.put("TextArea.font", FontUtil.getDefaultFont());
+
+        UIManager.put("Panel.background", Colors.WINDOW_BACKGROUND);
+        UIManager.put("CheckBox.background", Colors.WINDOW_BACKGROUND);
+
+        leftPanel = new LeftPanel();
+        rightPanel = new RightPanel();
+    }
+
+    public void initView()
+    {
+        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        setMinimumSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+
+        if (OSUtil.isWindows())
+        {
+            // 隐藏标题栏
+            setUndecorated(true);
+
+            String windows = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
+            try
+            {
+                UIManager.setLookAndFeel(windows);
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            //getRootPane().setBorder(new LineBorder(Color.GRAY, 1, true));
+        } else if (OSUtil.isLinux())
+        {
+            // 隐藏标题栏
+            setUndecorated(true);
+        }
+
+        add(leftPanel, BorderLayout.WEST);
+        add(rightPanel, BorderLayout.CENTER);
+        centerScreen();
+    }
+
+    public void setListeners()
+    {
+        trayIcon.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                // 显示主窗口
+                setToFront();
+
+                // 任务栏图标停止闪动
+                if (trayFlashing)
+                {
+                    trayFlashing = false;
+                    trayIcon.setImage(normalTrayIcon);
+                }
+                super.mouseClicked(e);
+            }
+        });
+
+        addComponentListener(new ComponentAdapter()
+        {
+            @Override
+            public void componentResized(ComponentEvent e)
+            {
+                currentWindowWidth = (int) e.getComponent().getBounds().getWidth();
+                currentWindowHeight = (int) e.getComponent().getBounds().getHeight();
+            }
+
+            /*@Override
+            public void componentMoved(ComponentEvent e)
+            {
+                if (ExpressionPopup.context.isVisible())
+                {
+                    ExpressionPopup.context.setVisible(false);
+                }
+
+                super.componentMoved(e);
+            }*/
+        });
+
+        if (OSUtil.isMacOS())
+        {
+            com.apple.eawt.Application app = com.apple.eawt.Application.getApplication();
+            app.addAppEventListener(new AppForegroundListener()
+            {
+                @Override
+                public void appMovedToBackground(AppEvent.AppForegroundEvent arg0)
+                {
+                }
+
+                @Override
+                public void appRaisedToForeground(AppEvent.AppForegroundEvent arg0)
+                {
+                    setVisible(true);
+                }
+
+            });
+
+            app.addAppEventListener((AppReOpenedListener) arg0 -> setVisible(true));
+        }
+
+
+        //全局事件处理器
+        Toolkit.getDefaultToolkit().addAWTEventListener(event ->
+        {
+            MouseEvent me = (MouseEvent) event;
+            if (me.getID() == MouseEvent.MOUSE_PRESSED)
+            {
+                if (me.getButton() == MouseEvent.BUTTON1)
+                {
+                    Object conn = me.getSource();
+                    GlobalEventHandler.callLeftButtonClickedListeners(conn);
+                }
+            }
+        }, AWTEvent.MOUSE_EVENT_MASK);
+
     }
 
     private void initResource()
     {
-        new Thread(() -> initTray()).start();
-
+        ThreadPoolUtils.execute(() -> initTray());
     }
 
 
@@ -112,8 +215,7 @@ public class MainFrame extends JFrame
         SystemTray systemTray = SystemTray.getSystemTray();//获取系统托盘
         try
         {
-            boolean isMacOs = OSUtil.getOsType() == OSUtil.Mac_OS;
-            if (isMacOs)
+            if (OSUtil.isMacOS())
             {
                 normalTrayIcon = IconUtil.getIcon(this, "/image/ic_launcher_dark.png", 20, 20, false).getImage();
                 trayIcon = new TrayIcon(normalTrayIcon, APP_NAME);
@@ -137,24 +239,6 @@ public class MainFrame extends JFrame
                 trayIcon = new TrayIcon(normalTrayIcon, APP_NAME);
                 trayIcon.setImageAutoSize(true);
                 PopupMenu menu = new PopupMenu();
-
-                trayIcon.addMouseListener(new MouseAdapter()
-                {
-                    @Override
-                    public void mouseClicked(MouseEvent e)
-                    {
-                        // 显示主窗口
-                        setToFront();
-
-                        // 任务栏图标停止闪动
-                        if (trayFlashing)
-                        {
-                            trayFlashing = false;
-                            trayIcon.setImage(normalTrayIcon);
-                        }
-                        super.mouseClicked(e);
-                    }
-                });
 
 
                 MenuItem exitItem = new MenuItem("退出");
@@ -228,64 +312,6 @@ public class MainFrame extends JFrame
     }
 
 
-    private void initComponents()
-    {
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
-        // 任务栏图标
-        if (OSUtil.getOsType() != OSUtil.Mac_OS)
-        {
-            setIconImage(IconUtil.getIcon(this, "/image/ic_launcher.png", true).getImage());
-        }
-
-        UIManager.put("Label.font", FontUtil.getDefaultFont());
-        UIManager.put("Panel.font", FontUtil.getDefaultFont());
-        UIManager.put("TextArea.font", FontUtil.getDefaultFont());
-
-        UIManager.put("Panel.background", Colors.WINDOW_BACKGROUND);
-        UIManager.put("CheckBox.background", Colors.WINDOW_BACKGROUND);
-
-        leftPanel = new LeftPanel();
-        rightPanel = new RightPanel();
-    }
-
-
-    private void initView()
-    {
-        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        setMinimumSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
-
-
-        if (OSUtil.getOsType() == OSUtil.Windows)
-        {
-            // 隐藏标题栏
-            setUndecorated(true);
-
-            String windows = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-            try
-            {
-                UIManager.setLookAndFeel(windows);
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-
-            getRootPane().setBorder(new LineBorder(Color.GRAY, 1, true));
-        }
-        else if (OSUtil.getOsType() == OSUtil.Linux)
-        {
-            // 隐藏标题栏
-            setUndecorated(true);
-        }
-
-        setListeners();
-
-        add(leftPanel, BorderLayout.WEST);
-        add(rightPanel, BorderLayout.CENTER);
-        centerScreen();
-    }
-
-
     /**
      * 使窗口在屏幕中央显示
      */
@@ -294,90 +320,6 @@ public class MainFrame extends JFrame
         Toolkit tk = Toolkit.getDefaultToolkit();
         this.setLocation((tk.getScreenSize().width - currentWindowWidth) / 2,
                 (tk.getScreenSize().height - currentWindowHeight) / 2);
-    }
-
-    private void setListeners()
-    {
-        addComponentListener(new ComponentAdapter()
-        {
-            @Override
-            public void componentResized(ComponentEvent e)
-            {
-                currentWindowWidth = (int) e.getComponent().getBounds().getWidth();
-                currentWindowHeight = (int) e.getComponent().getBounds().getHeight();
-            }
-
-            @Override
-            public void componentMoved(ComponentEvent e)
-            {
-                if (ExpressionPopup.context.isVisible())
-                {
-                    ExpressionPopup.context.setVisible(false);
-                }
-
-                super.componentMoved(e);
-            }
-        });
-
-        if (OSUtil.getOsType() == OSUtil.Mac_OS)
-        {
-            com.apple.eawt.Application app = com.apple.eawt.Application.getApplication();
-            app.addAppEventListener(new AppForegroundListener()
-            {
-                @Override
-                public void appMovedToBackground(AppEvent.AppForegroundEvent arg0)
-                {
-                }
-
-                @Override
-                public void appRaisedToForeground(AppEvent.AppForegroundEvent arg0)
-                {
-                    setVisible(true);
-                }
-
-            });
-
-            app.addAppEventListener(new AppReOpenedListener()
-            {
-                @Override
-                public void appReOpened(AppEvent.AppReOpenedEvent arg0)
-                {
-                    setVisible(true);
-                }
-            });
-        }
-
-
-        //全局事件处理器, 点击任意处关闭表情面板
-        Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener()
-        {
-            @Override
-            public void eventDispatched(AWTEvent event)
-            {
-                MouseEvent me = (MouseEvent) event;
-                if (me.getID() == MouseEvent.MOUSE_PRESSED)
-                {
-                    if (me.getButton() == MouseEvent.BUTTON1)
-                    {
-                        Object conn = me.getSource();
-                        if (conn == ExpressionPopup.context)
-                        {
-                            return;
-                        } else if (conn instanceof JComponent && ((JComponent) conn).getParent() == ExpressionPopup.context.getListPanel())
-                        {
-                            return;
-                        } else
-                        {
-                            if (ExpressionPopup.context.isVisible())
-                            {
-                                ExpressionPopup.context.setVisible(false);
-                            }
-                        }
-                    }
-                }
-            }
-        }, AWTEvent.MOUSE_EVENT_MASK);
-
     }
 
 
@@ -397,21 +339,17 @@ public class MainFrame extends JFrame
         setVisible(true);
         setAlwaysOnTop(true);
         setExtendedState(Frame.NORMAL);
-        new Thread(new Runnable()
+        new Thread(() ->
         {
-            @Override
-            public void run()
+            try
             {
-                try
-                {
-                    Thread.sleep(500);
-                } catch (InterruptedException e1)
-                {
-                    e1.printStackTrace();
-                }
-
-                setAlwaysOnTop(false);
+                Thread.sleep(500);
+            } catch (InterruptedException e1)
+            {
+                e1.printStackTrace();
             }
+
+            setAlwaysOnTop(false);
         }).start();
     }
 

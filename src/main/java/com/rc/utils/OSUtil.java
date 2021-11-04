@@ -7,7 +7,7 @@ public class OSUtil
 {
     public static final int  Windows = 0;
     public static final int  Linux = 1;
-    public static final int  Mac_OS = 2;
+    public static final int MacOS = 2;
     public static final int  Others = 3;
 
     public static int currentOS = -1;
@@ -28,7 +28,7 @@ public class OSUtil
             }
             else if (os.indexOf("Mac OS") > -1)
             {
-                currentOS = Mac_OS;
+                currentOS = MacOS;
             }
             else
             {
@@ -37,5 +37,20 @@ public class OSUtil
         }
 
         return currentOS;
+    }
+
+    public static boolean isLinux()
+    {
+        return getOsType() == Linux;
+    }
+
+    public static boolean isMacOS()
+    {
+        return getOsType() == MacOS;
+    }
+
+    public static boolean isWindows()
+    {
+        return getOsType() == Windows;
     }
 }

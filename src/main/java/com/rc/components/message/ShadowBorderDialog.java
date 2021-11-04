@@ -31,7 +31,7 @@ public class ShadowBorderDialog extends JDialog
         setBounds(posX, posY, DIALOG_WIDTH  +40, DIALOG_HEIGHT + 40);
         setUndecorated(true);
 
-        if (OSUtil.getOsType() != OSUtil.Mac_OS)
+        if (OSUtil.getOsType() != OSUtil.MacOS)
         {
             AWTUtilities.setWindowOpaque(this, false);
             getRootPane().setBorder(ShadowBorder.newInstance());
